@@ -5,24 +5,30 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Aplomb.Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="DataDiagramEntityTypes">
+        <EntityType Name="UserEntities">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DataDiagramID" Type="int" Nullable="false" />
-          <Property Name="EntityTypeID" Type="int" Nullable="false" />
-          <Property Name="Color" Type="char" MaxLength="6" Nullable="false" />
-          <Property Name="PositionX" Type="float" Nullable="false" />
-          <Property Name="PositionY" Type="float" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="EntityID" Type="int" Nullable="false" />
+          <Property Name="PermissionID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="DataDiagrams">
+        <EntityType Name="UserRoles">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Entities">
           <Key>
@@ -30,36 +36,6 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="EntityTypes">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Fields">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EntityTypeID" Type="int" Nullable="false" />
-          <Property Name="TypeID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="MinNumber" Type="int" Nullable="false" />
-          <Property Name="MaxNumber" Type="int" />
-          <Property Name="SortOrder" Type="int" Nullable="false" />
-          <Property Name="ExtraInfo" Type="xml" />
-        </EntityType>
-        <EntityType Name="FieldTypes">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ValueTableName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="SortOrder" Type="int" Nullable="false" />
-          <Property Name="ExtraInfoFields" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="FieldValues">
           <Key>
@@ -121,61 +97,54 @@
           <Property Name="FieldValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Value" Type="nvarchar" MaxLength="80" Nullable="false" />
         </EntityType>
-        <EntityType Name="LayoutFields">
+        <EntityType Name="DataDiagramEntityTypes">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LayoutID" Type="int" Nullable="false" />
-          <Property Name="FieldID" Type="int" Nullable="false" />
-          <Property Name="NameOverride" Type="nvarchar" MaxLength="50" />
-          <Property Name="SortOrder" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Layouts">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DataDiagramID" Type="int" Nullable="false" />
           <Property Name="EntityTypeID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Color" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="PositionX" Type="float" Nullable="false" />
+          <Property Name="PositionY" Type="float" Nullable="false" />
         </EntityType>
-        <EntityType Name="MenuItems">
+        <EntityType Name="DataDiagrams">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="SortOrder" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PageID" Type="int" />
         </EntityType>
-        <EntityType Name="Menus">
+        <EntityType Name="EntityTypes">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fields">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntityTypeID" Type="int" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MinNumber" Type="int" Nullable="false" />
+          <Property Name="MaxNumber" Type="int" />
           <Property Name="SortOrder" Type="int" Nullable="false" />
-          <Property Name="ParentMenuItemID" Type="int" />
+          <Property Name="ExtraInfo" Type="xml" />
         </EntityType>
-        <EntityType Name="Pages">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PageTypeID" Type="int" Nullable="false" />
-          <Property Name="LayoutID" Type="int" Nullable="false" />
-          <Property Name="SectionID" Type="int" />
-          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Slug" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PageTypes">
+        <EntityType Name="FieldTypes">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ValueTableName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="ExtraInfoFields" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Permissions">
           <Key>
@@ -235,6 +204,62 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="LayoutFields">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LayoutID" Type="int" Nullable="false" />
+          <Property Name="FieldID" Type="int" Nullable="false" />
+          <Property Name="NameOverride" Type="nvarchar" MaxLength="50" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Layouts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="EntityTypeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PageID" Type="int" />
+        </EntityType>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="ParentMenuItemID" Type="int" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageTypeID" Type="int" Nullable="false" />
+          <Property Name="LayoutID" Type="int" Nullable="false" />
+          <Property Name="SectionID" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Slug" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PageTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Sections">
           <Key>
             <PropertyRef Name="ID" />
@@ -243,31 +268,6 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Slug" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="MenuID" Type="int" />
-        </EntityType>
-        <EntityType Name="UserEntities">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="EntityID" Type="int" Nullable="false" />
-          <Property Name="PermissionID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserRoles">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="RoleID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Users">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_DataDiagramEntityTypes_DataDiagrams">
           <End Role="DataDiagrams" Type="Self.DataDiagrams" Multiplicity="1" />
@@ -762,37 +762,37 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AplombModelsStoreContainer">
-          <EntitySet Name="DataDiagramEntityTypes" EntityType="Self.DataDiagramEntityTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DataDiagrams" EntityType="Self.DataDiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Entities" EntityType="Self.Entities" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EntityTypes" EntityType="Self.EntityTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Fields" EntityType="Self.Fields" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FieldTypes" EntityType="Self.FieldTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FieldValues" EntityType="Self.FieldValues" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FieldValues_Bit" EntityType="Self.FieldValues_Bit" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FieldValues_Date" EntityType="Self.FieldValues_Date" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FieldValues_Decimal" EntityType="Self.FieldValues_Decimal" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FieldValues_FK" EntityType="Self.FieldValues_FK" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FieldValues_Int" EntityType="Self.FieldValues_Int" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FieldValues_LongText" EntityType="Self.FieldValues_LongText" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FieldValues_ShortText" EntityType="Self.FieldValues_ShortText" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LayoutFields" EntityType="Self.LayoutFields" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Layouts" EntityType="Self.Layouts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PageTypes" EntityType="Self.PageTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RightEntityTypes" EntityType="Self.RightEntityTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RightFields" EntityType="Self.RightFields" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RightPages" EntityType="Self.RightPages" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Rights" EntityType="Self.Rights" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RoleRights" EntityType="Self.RoleRights" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserEntities" EntityType="Self.UserEntities" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserEntities" EntityType="Self.UserEntities" Schema="accounts" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="accounts" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="accounts" store:Type="Tables" />
+          <EntitySet Name="Entities" EntityType="Self.Entities" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues" EntityType="Self.FieldValues" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_Bit" EntityType="Self.FieldValues_Bit" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_Date" EntityType="Self.FieldValues_Date" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_Decimal" EntityType="Self.FieldValues_Decimal" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_FK" EntityType="Self.FieldValues_FK" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_Int" EntityType="Self.FieldValues_Int" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_LongText" EntityType="Self.FieldValues_LongText" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_ShortText" EntityType="Self.FieldValues_ShortText" Schema="data" store:Type="Tables" />
+          <EntitySet Name="DataDiagramEntityTypes" EntityType="Self.DataDiagramEntityTypes" Schema="model" store:Type="Tables" />
+          <EntitySet Name="DataDiagrams" EntityType="Self.DataDiagrams" Schema="model" store:Type="Tables" />
+          <EntitySet Name="EntityTypes" EntityType="Self.EntityTypes" Schema="model" store:Type="Tables" />
+          <EntitySet Name="Fields" EntityType="Self.Fields" Schema="model" store:Type="Tables" />
+          <EntitySet Name="FieldTypes" EntityType="Self.FieldTypes" Schema="model" store:Type="Tables" />
+          <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="security" store:Type="Tables" />
+          <EntitySet Name="RightEntityTypes" EntityType="Self.RightEntityTypes" Schema="security" store:Type="Tables" />
+          <EntitySet Name="RightFields" EntityType="Self.RightFields" Schema="security" store:Type="Tables" />
+          <EntitySet Name="RightPages" EntityType="Self.RightPages" Schema="security" store:Type="Tables" />
+          <EntitySet Name="Rights" EntityType="Self.Rights" Schema="security" store:Type="Tables" />
+          <EntitySet Name="RoleRights" EntityType="Self.RoleRights" Schema="security" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="security" store:Type="Tables" />
+          <EntitySet Name="LayoutFields" EntityType="Self.LayoutFields" Schema="site" store:Type="Tables" />
+          <EntitySet Name="Layouts" EntityType="Self.Layouts" Schema="site" store:Type="Tables" />
+          <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="site" store:Type="Tables" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" Schema="site" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="site" store:Type="Tables" />
+          <EntitySet Name="PageTypes" EntityType="Self.PageTypes" Schema="site" store:Type="Tables" />
+          <EntitySet Name="Sections" EntityType="Self.Sections" Schema="site" store:Type="Tables" />
           <AssociationSet Name="FK_DataDiagramEntityTypes_DataDiagrams" Association="Self.FK_DataDiagramEntityTypes_DataDiagrams">
             <End Role="DataDiagrams" EntitySet="DataDiagrams" />
             <End Role="DataDiagramEntityTypes" EntitySet="DataDiagramEntityTypes" />
