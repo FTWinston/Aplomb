@@ -16,7 +16,7 @@ namespace Aplomb.Models
     public partial class DataModel : DbContext
     {
         public DataModel()
-            : base("name=Entities")
+            : base("name=DataModel")
         {
         }
     
@@ -54,5 +54,7 @@ namespace Aplomb.Models
         public virtual DbSet<PageType> PageTypes { get; set; }
         public virtual DbSet<RightPage> RightPages { get; set; }
         public virtual DbSet<Section> Sections { get; set; }
+        public virtual DbSet<DataDiagramEntityType> DataDiagramEntityTypes { get; set; }
+        public virtual DbSet<DataDiagram> DataDiagrams { get; set; }
     }
 }

@@ -1490,7 +1490,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DataModel" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Entities" EntityType="Self.Entity" />
           <EntitySet Name="EntityTypes" EntityType="Self.EntityType" />
           <EntitySet Name="Fields" EntityType="Self.Field" />
@@ -2002,7 +2002,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AplombModelsStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="AplombModelsStoreContainer" CdmEntityContainer="DataModel">
           <EntitySetMapping Name="Entities">
             <EntityTypeMapping TypeName="Aplomb.Models.Entity">
               <MappingFragment StoreEntitySet="Entities">

@@ -1,0 +1,72 @@
+﻿@model Aplomb.Areas.Admin.Models.DiagramEditModel
+
+@{
+    ViewBag.Title = "Edit Diagram";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>DataDiagram</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Diagram.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Diagram.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Diagram.Name)
+                @Html.ValidationMessageFor(model => model.Diagram.Name)
+            </div>
+        </div>
+        @if (Model.Diagram != null)
+        {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Diagram.SortOrder, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Diagram.SortOrder)
+                @Html.ValidationMessageFor(model => model.Diagram.SortOrder)
+            </div>
+        </div>
+        
+            foreach (var type in Model.Diagram.DataDiagramEntityTypes)
+            {
+        <div class="form-group">
+            @Html.Label("Entity", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => type.EntityType.Name)
+                @Html.ValidationMessageFor(model => type.EntityType.Name)
+            </div>
+        </div>
+            }
+        }
+        <div class="form-group">
+            @Html.Label("Add New Entity", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                [button should show here]
+            </div>
+        </div>
+        @if (Model.OtherEntityTypes.Count > 0)
+        {
+        <div class="form-group">
+            @Html.Label("Add Existing Entity", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("existingTypes", Model.OtherEntityTypes)
+            </div>
+        </div>
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -12,24 +12,17 @@ namespace Aplomb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EntityType
+    public partial class DataDiagram
     {
-        public EntityType()
+        public DataDiagram()
         {
-            this.Entities = new HashSet<Entity>();
-            this.Fields = new HashSet<Field>();
-            this.RightEntityTypes = new HashSet<RightEntityType>();
-            this.Layouts = new HashSet<Layout>();
             this.DataDiagramEntityTypes = new HashSet<DataDiagramEntityType>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
+        public int SortOrder { get; set; }
     
-        public virtual ICollection<Entity> Entities { get; set; }
-        public virtual ICollection<Field> Fields { get; set; }
-        public virtual ICollection<RightEntityType> RightEntityTypes { get; set; }
-        public virtual ICollection<Layout> Layouts { get; set; }
         public virtual ICollection<DataDiagramEntityType> DataDiagramEntityTypes { get; set; }
     }
 }
