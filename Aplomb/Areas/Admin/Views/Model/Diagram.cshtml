@@ -6,67 +6,78 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(Model.IsNew ? "CreateDiagram" : "EditDiagram", "Model"))
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>DataDiagram</h4>
+    <div class="form-inline">
+        <h4>Data Diagram</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Diagram.ID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Diagram.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Diagram.Name)
-                @Html.ValidationMessageFor(model => model.Diagram.Name)
-            </div>
+            @Html.LabelFor(model => model.Diagram.Name, new { @class = "control-label" })
+            @Html.EditorFor(model => model.Diagram.Name)
+            @Html.ValidationMessageFor(model => model.Diagram.Name)
         </div>
         @if (Model.Diagram != null)
         {
-        <div class="form-group">
-            @Html.LabelFor(model => model.Diagram.SortOrder, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Diagram.SortOrder)
-                @Html.ValidationMessageFor(model => model.Diagram.SortOrder)
-            </div>
+        <div class="form-group col-md-offset-1">
+            @Html.Label("Sort Order", new { @class = "control-label" })
+            @Html.EditorFor(model => model.Diagram.SortOrder)
+            @Html.ValidationMessageFor(model => model.Diagram.SortOrder)
         </div>
-        
-            foreach (var type in Model.Diagram.DataDiagramEntityTypes)
-            {
-        <div class="form-group">
-            @Html.Label("Entity", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => type.EntityType.Name)
-                @Html.ValidationMessageFor(model => type.EntityType.Name)
-            </div>
-        </div>
-            }
         }
-        <div class="form-group">
-            @Html.Label("Add New Entity", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                [button should show here]
-            </div>
+        <div class="form-group col-md-offset-1">
+            @Html.Label("Add New Entity", new { @class = "control-label" })
+            <input type="button" value="Create new" class="btn" id="btnNew" />
         </div>
         @if (Model.OtherEntityTypes.Count > 0)
         {
-        <div class="form-group">
-            @Html.Label("Add Existing Entity", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("existingTypes", Model.OtherEntityTypes)
-            </div>
+        <div class="form-group col-md-offset-1">
+            @Html.Label("Add Existing Entity", new { @class = "control-label" })
+            @Html.DropDownList("existingTypes", Model.OtherEntityTypes)
+            <input type="button" value="Add" class="btn" id="btnExisting" />
         </div>
         }
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <div class="form-group col-md-offset-1">
+            <input type="submit" value="Save" class="btn btn-default" onclick="saveDiagram()" />
         </div>
+        
+        @Html.Hidden("layout")
     </div>
 }
+
+<div class="diagramArea">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="diagram"></svg>
+</div>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/admin")
+    @Styles.Render("~/content/admin")
+
+    <script type="text/javascript">
+    @if (Model.Diagram != null)
+    {
+        foreach (var type in Model.Diagram.DataDiagramEntityTypes)
+        {
+            @:new Node("@type.EntityType.Name", "@type.Color", @type.PositionX, @type.PositionY, @type.EntityTypeID);
+        }
+
+        foreach (var type in Model.Diagram.DataDiagramEntityTypes)
+        {
+            foreach (var key in type.EntityType.Fields.Where(f => f.FieldType.Name == "Foreign Key"))
+            {
+                // render an FK from key.EntityTypeID to key.ExtraInfo.Whatever
+            }
+        }
+    }
+    
+    // @Url.Action("CreateType");
+    </script>
+}

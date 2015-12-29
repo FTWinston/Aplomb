@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Aplomb.Models;
 using Aplomb.Areas.Admin.Models;
+using System.Web.Script.Serialization;
 
 namespace Aplomb.Areas.Admin.Controllers
 {
@@ -15,6 +16,7 @@ namespace Aplomb.Areas.Admin.Controllers
     {
         private DataModel db = new DataModel();
 
+        #region diagrams
         // GET: /Admin/Model/
         public ActionResult Index()
         {
@@ -34,14 +36,14 @@ namespace Aplomb.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
-            var model = DiagramEditModel.Create(db, diagram);
+            var model = DiagramEditModel.Create(db, diagram, false);
             return View("Diagram", model);
         }
 
         // GET: /Admin/Model/CreateDiagram
         public ActionResult CreateDiagram()
         {
-            var model = DiagramEditModel.Create(db, null);
+            var model = DiagramEditModel.Create(db, null, true);
             return View("Diagram", model);
         }
 
@@ -50,7 +52,7 @@ namespace Aplomb.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateDiagram([Bind(Include = "Name")] DataDiagram diagram)
+        public ActionResult CreateDiagram([Bind(Include = "Name")] DataDiagram diagram, string layout)
         {
             if (ModelState.IsValid)
             {
@@ -60,34 +62,86 @@ namespace Aplomb.Areas.Admin.Controllers
                     diagram.SortOrder = db.DataDiagrams.Max(d => d.SortOrder) + 1;
 
                 db.DataDiagrams.Add(diagram);
+                SaveDiagramEntities(diagram, layout, false);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
-            var model = DiagramEditModel.Create(db, diagram);
+            var model = DiagramEditModel.Create(db, diagram, true);
             return View("Diagram", model);
         }
 
-        // POST: /Admin/Model/Edit/5
+        // POST: /Admin/Model/EditDiagram/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditDiagram([Bind(Include="ID,Name,SortOrder")] DataDiagram diagram)
+        public ActionResult EditDiagram([Bind(Include="ID,Name,SortOrder")] DataDiagram diagram, string layout)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(diagram).State = EntityState.Modified;
+                string name = diagram.Name;
+                int sortOrder = diagram.SortOrder;
+                diagram = db.DataDiagrams.First(d => d.ID == diagram.ID); // it seems this is required to populate the DataDiagramEntityTypes list - Attach then Reload doesn't work.
+                diagram.Name = name;
+                diagram.SortOrder = sortOrder;
+
+                SaveDiagramEntities(diagram, layout, true);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            var model = DiagramEditModel.Create(db, diagram);
+            var model = DiagramEditModel.Create(db, diagram, false);
             return View("Diagram", model);
         }
 
-        // GET: /Admin/Model/Delete/5
-        public ActionResult Delete(int? id)
+        private void SaveDiagramEntities(DataDiagram diagram, string layoutJson, bool hasExisting)
+        {
+            if (hasExisting)
+            {
+                db.DataDiagramEntityTypes.RemoveRange(diagram.DataDiagramEntityTypes); // TODO: don't delete records we will just recreate
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            var entities = js.Deserialize<DiagramEntityModel[]>(layoutJson);
+
+            foreach (var entity in entities.Where(e => e.ID.HasValue))
+            {
+                var diagramEntity = new DataDiagramEntityType()
+                {
+                    EntityTypeID = entity.ID.Value, // TODO: verify that this exists
+                    PositionX = entity.X,
+                    PositionY = entity.Y,
+                    Color = entity.Color,
+                    DataDiagram = diagram
+                };
+                db.DataDiagramEntityTypes.Add(diagramEntity);
+            }
+
+            foreach (var entity in entities.Where(e => !e.ID.HasValue))
+            {
+                EntityType entityType = new EntityType()
+                {
+                    Name = entity.Name // TODO: verify that this isn't already used
+                };
+
+                db.EntityTypes.Add(entityType);
+
+                var diagramEntity = new DataDiagramEntityType()
+                {
+                    EntityType = entityType,
+                    PositionX = entity.X,
+                    PositionY = entity.Y,
+                    Color = entity.Color,
+                    DataDiagram = diagram
+                };
+                db.DataDiagramEntityTypes.Add(diagramEntity);
+            }
+        }
+
+        // GET: /Admin/Model/DeleteDiagram/5
+        public ActionResult DeleteDiagram(int? id)
         {
             if (id == null)
             {
@@ -101,16 +155,29 @@ namespace Aplomb.Areas.Admin.Controllers
             return View(datadiagram);
         }
 
-        // POST: /Admin/Model/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: /Admin/Model/DeleteDiagram/5
+        [HttpPost, ActionName("DeleteDiagram")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteDiagramConfirmed(int id)
         {
             DataDiagram datadiagram = db.DataDiagrams.Find(id);
             db.DataDiagrams.Remove(datadiagram);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        #endregion
+
+        #region types
+        // POST: /Admin/Model/Type
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Type(int typeID, int diagramID)
+        {
+            return View("Type");
+        }
+        #endregion types
 
         protected override void Dispose(bool disposing)
         {

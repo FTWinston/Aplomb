@@ -24,9 +24,14 @@
         </td>
         <td>
             @Html.ActionLink("View", "Diagram", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Delete", "DeleteDiagram", new { id = item.ID })
         </td>
     </tr>
 }
 
 </table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/admin")
+    @Styles.Render("~/content/admin")
+}
