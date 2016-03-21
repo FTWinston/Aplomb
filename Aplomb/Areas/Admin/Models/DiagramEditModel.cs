@@ -1,4 +1,5 @@
-﻿using Aplomb.Models;
+﻿using Aplomb.Common.Models;
+using Aplomb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

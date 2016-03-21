@@ -1,0 +1,2324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Aplomb.Common.Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="UserEntities">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="EntityID" Type="int" Nullable="false" />
+          <Property Name="PermissionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entities">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldValues">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntityID" Type="int" Nullable="false" />
+          <Property Name="FieldID" Type="int" Nullable="false" />
+          <Property Name="FieldNumber" Type="int" Nullable="false" />
+          <Property Name="ValueNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldValues_Bit">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldValues_Date">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldValues_Decimal">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldValues_FK">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
+          <Property Name="IsChild" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldValues_FreeText">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldValues_Int">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldValues_Text">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DataDiagramEntityTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataDiagramID" Type="int" Nullable="false" />
+          <Property Name="EntityTypeID" Type="int" Nullable="false" />
+          <Property Name="Color" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="PositionX" Type="float" Nullable="false" />
+          <Property Name="PositionY" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DataDiagrams">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EntityTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fields">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntityTypeID" Type="int" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MinNumber" Type="int" Nullable="false" />
+          <Property Name="MaxNumber" Type="int" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="ExtraInfo" Type="xml" />
+        </EntityType>
+        <EntityType Name="FieldTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ValueTableName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="ExtraInfoFields" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Permissions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CanView" Type="bit" Nullable="false" />
+          <Property Name="CanEdit" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RightEntityTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RightID" Type="int" Nullable="false" />
+          <Property Name="EntityTypeID" Type="int" Nullable="false" />
+          <Property Name="PermissionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RightFields">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RightID" Type="int" Nullable="false" />
+          <Property Name="FieldID" Type="int" Nullable="false" />
+          <Property Name="PermissionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RightPages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RightID" Type="int" Nullable="false" />
+          <Property Name="PageID" Type="int" Nullable="false" />
+          <Property Name="PermissionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rights">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleRights">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="RightID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LayoutFields">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LayoutID" Type="int" Nullable="false" />
+          <Property Name="FieldID" Type="int" Nullable="false" />
+          <Property Name="NameOverride" Type="nvarchar" MaxLength="50" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Layouts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="EntityTypeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PageID" Type="int" />
+        </EntityType>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="ParentMenuItemID" Type="int" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageTypeID" Type="int" Nullable="false" />
+          <Property Name="LayoutID" Type="int" Nullable="false" />
+          <Property Name="SectionID" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Slug" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PageTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sections">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Slug" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenuID" Type="int" />
+        </EntityType>
+        <Association Name="FK_DataDiagramEntityTypes_DataDiagrams">
+          <End Role="DataDiagrams" Type="Self.DataDiagrams" Multiplicity="1" />
+          <End Role="DataDiagramEntityTypes" Type="Self.DataDiagramEntityTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DataDiagrams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DataDiagramEntityTypes">
+              <PropertyRef Name="DataDiagramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DataDiagramEntityTypes_EntityTypes">
+          <End Role="EntityTypes" Type="Self.EntityTypes" Multiplicity="1" />
+          <End Role="DataDiagramEntityTypes" Type="Self.DataDiagramEntityTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DataDiagramEntityTypes">
+              <PropertyRef Name="EntityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entities_EntityTypes">
+          <End Role="EntityTypes" Type="Self.EntityTypes" Multiplicity="1" />
+          <End Role="Entities" Type="Self.Entities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Entities">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fields_EntityTypes">
+          <End Role="EntityTypes" Type="Self.EntityTypes" Multiplicity="1" />
+          <End Role="Fields" Type="Self.Fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Fields">
+              <PropertyRef Name="EntityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fields_FieldTypes">
+          <End Role="FieldTypes" Type="Self.FieldTypes" Multiplicity="1" />
+          <End Role="Fields" Type="Self.Fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FieldTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Fields">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Bit_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="1" />
+          <End Role="FieldValues_Bit" Type="Self.FieldValues_Bit" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_Bit">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Date_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="1" />
+          <End Role="FieldValues_Date" Type="Self.FieldValues_Date" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_Date">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Decimal_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="1" />
+          <End Role="FieldValues_Decimal" Type="Self.FieldValues_Decimal" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_Decimal">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Entities">
+          <End Role="Entities" Type="Self.Entities" Multiplicity="1" />
+          <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entities">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues">
+              <PropertyRef Name="EntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Fields">
+          <End Role="Fields" Type="Self.Fields" Multiplicity="1" />
+          <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_FK_Entities">
+          <End Role="Entities" Type="Self.Entities" Multiplicity="1" />
+          <End Role="FieldValues_FK" Type="Self.FieldValues_FK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entities">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_FK">
+              <PropertyRef Name="Value" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_FK_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="1" />
+          <End Role="FieldValues_FK" Type="Self.FieldValues_FK" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_FK">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_FreeText_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="1" />
+          <End Role="FieldValues_FreeText" Type="Self.FieldValues_FreeText" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_FreeText">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Int_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="1" />
+          <End Role="FieldValues_Int" Type="Self.FieldValues_Int" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_Int">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Text_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="1" />
+          <End Role="FieldValues_Text" Type="Self.FieldValues_Text" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_Text">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LayoutFields_Fields">
+          <End Role="Fields" Type="Self.Fields" Multiplicity="1" />
+          <End Role="LayoutFields" Type="Self.LayoutFields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LayoutFields">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LayoutFields_Layouts">
+          <End Role="Layouts" Type="Self.Layouts" Multiplicity="1" />
+          <End Role="LayoutFields" Type="Self.LayoutFields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layouts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LayoutFields">
+              <PropertyRef Name="LayoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Layouts_EntityTypes">
+          <End Role="EntityTypes" Type="Self.EntityTypes" Multiplicity="1" />
+          <End Role="Layouts" Type="Self.Layouts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Layouts">
+              <PropertyRef Name="EntityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItems_Menus">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="1" />
+          <End Role="MenuItems" Type="Self.MenuItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuItems">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItems_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="0..1" />
+          <End Role="MenuItems" Type="Self.MenuItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuItems">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_MenuItems">
+          <End Role="MenuItems" Type="Self.MenuItems" Multiplicity="0..1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItems">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="ParentMenuItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pages_Layouts">
+          <End Role="Layouts" Type="Self.Layouts" Multiplicity="1" />
+          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layouts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="LayoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pages_PageTypes">
+          <End Role="PageTypes" Type="Self.PageTypes" Multiplicity="1" />
+          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PageTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="PageTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pages_Sections">
+          <End Role="Sections" Type="Self.Sections" Multiplicity="0..1" />
+          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sections">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightEntityTypes_EntityTypes">
+          <End Role="EntityTypes" Type="Self.EntityTypes" Multiplicity="1" />
+          <End Role="RightEntityTypes" Type="Self.RightEntityTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightEntityTypes">
+              <PropertyRef Name="EntityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightEntityTypes_Permissions">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
+          <End Role="RightEntityTypes" Type="Self.RightEntityTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightEntityTypes">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightEntityTypes_Rights">
+          <End Role="Rights" Type="Self.Rights" Multiplicity="1" />
+          <End Role="RightEntityTypes" Type="Self.RightEntityTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rights">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightEntityTypes">
+              <PropertyRef Name="RightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightFields_Permissions">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
+          <End Role="RightFields" Type="Self.RightFields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightFields">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightFields_RightFields">
+          <End Role="Fields" Type="Self.Fields" Multiplicity="1" />
+          <End Role="RightFields" Type="Self.RightFields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightFields">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightFields_Rights">
+          <End Role="Rights" Type="Self.Rights" Multiplicity="1" />
+          <End Role="RightFields" Type="Self.RightFields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rights">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightFields">
+              <PropertyRef Name="RightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightPages_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="RightPages" Type="Self.RightPages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightPages">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightPages_Permissions">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
+          <End Role="RightPages" Type="Self.RightPages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightPages">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightPages_Rights">
+          <End Role="Rights" Type="Self.Rights" Multiplicity="1" />
+          <End Role="RightPages" Type="Self.RightPages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rights">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightPages">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleRights_Rights">
+          <End Role="Rights" Type="Self.Rights" Multiplicity="1" />
+          <End Role="RoleRights" Type="Self.RoleRights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rights">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RoleRights">
+              <PropertyRef Name="RightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleRights_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="RoleRights" Type="Self.RoleRights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RoleRights">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sections_Menus">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="0..1" />
+          <End Role="Sections" Type="Self.Sections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sections">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEntities_Entities">
+          <End Role="Entities" Type="Self.Entities" Multiplicity="1" />
+          <End Role="UserEntities" Type="Self.UserEntities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entities">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserEntities">
+              <PropertyRef Name="EntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEntities_Permissions">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
+          <End Role="UserEntities" Type="Self.UserEntities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserEntities">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEntities_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserEntities" Type="Self.UserEntities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserEntities">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AplombModelsStoreContainer">
+          <EntitySet Name="UserEntities" EntityType="Self.UserEntities" Schema="accounts" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="accounts" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="accounts" store:Type="Tables" />
+          <EntitySet Name="Entities" EntityType="Self.Entities" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues" EntityType="Self.FieldValues" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_Bit" EntityType="Self.FieldValues_Bit" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_Date" EntityType="Self.FieldValues_Date" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_Decimal" EntityType="Self.FieldValues_Decimal" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_FK" EntityType="Self.FieldValues_FK" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_FreeText" EntityType="Self.FieldValues_FreeText" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_Int" EntityType="Self.FieldValues_Int" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_Text" EntityType="Self.FieldValues_Text" Schema="data" store:Type="Tables" />
+          <EntitySet Name="DataDiagramEntityTypes" EntityType="Self.DataDiagramEntityTypes" Schema="model" store:Type="Tables" />
+          <EntitySet Name="DataDiagrams" EntityType="Self.DataDiagrams" Schema="model" store:Type="Tables" />
+          <EntitySet Name="EntityTypes" EntityType="Self.EntityTypes" Schema="model" store:Type="Tables" />
+          <EntitySet Name="Fields" EntityType="Self.Fields" Schema="model" store:Type="Tables" />
+          <EntitySet Name="FieldTypes" EntityType="Self.FieldTypes" Schema="model" store:Type="Tables" />
+          <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="security" store:Type="Tables" />
+          <EntitySet Name="RightEntityTypes" EntityType="Self.RightEntityTypes" Schema="security" store:Type="Tables" />
+          <EntitySet Name="RightFields" EntityType="Self.RightFields" Schema="security" store:Type="Tables" />
+          <EntitySet Name="RightPages" EntityType="Self.RightPages" Schema="security" store:Type="Tables" />
+          <EntitySet Name="Rights" EntityType="Self.Rights" Schema="security" store:Type="Tables" />
+          <EntitySet Name="RoleRights" EntityType="Self.RoleRights" Schema="security" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="security" store:Type="Tables" />
+          <EntitySet Name="LayoutFields" EntityType="Self.LayoutFields" Schema="site" store:Type="Tables" />
+          <EntitySet Name="Layouts" EntityType="Self.Layouts" Schema="site" store:Type="Tables" />
+          <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="site" store:Type="Tables" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" Schema="site" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="site" store:Type="Tables" />
+          <EntitySet Name="PageTypes" EntityType="Self.PageTypes" Schema="site" store:Type="Tables" />
+          <EntitySet Name="Sections" EntityType="Self.Sections" Schema="site" store:Type="Tables" />
+          <AssociationSet Name="FK_DataDiagramEntityTypes_DataDiagrams" Association="Self.FK_DataDiagramEntityTypes_DataDiagrams">
+            <End Role="DataDiagrams" EntitySet="DataDiagrams" />
+            <End Role="DataDiagramEntityTypes" EntitySet="DataDiagramEntityTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DataDiagramEntityTypes_EntityTypes" Association="Self.FK_DataDiagramEntityTypes_EntityTypes">
+            <End Role="EntityTypes" EntitySet="EntityTypes" />
+            <End Role="DataDiagramEntityTypes" EntitySet="DataDiagramEntityTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entities_EntityTypes" Association="Self.FK_Entities_EntityTypes">
+            <End Role="EntityTypes" EntitySet="EntityTypes" />
+            <End Role="Entities" EntitySet="Entities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fields_EntityTypes" Association="Self.FK_Fields_EntityTypes">
+            <End Role="EntityTypes" EntitySet="EntityTypes" />
+            <End Role="Fields" EntitySet="Fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fields_FieldTypes" Association="Self.FK_Fields_FieldTypes">
+            <End Role="FieldTypes" EntitySet="FieldTypes" />
+            <End Role="Fields" EntitySet="Fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Bit_FieldValues" Association="Self.FK_FieldValues_Bit_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_Bit" EntitySet="FieldValues_Bit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Date_FieldValues" Association="Self.FK_FieldValues_Date_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_Date" EntitySet="FieldValues_Date" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Decimal_FieldValues" Association="Self.FK_FieldValues_Decimal_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_Decimal" EntitySet="FieldValues_Decimal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Entities" Association="Self.FK_FieldValues_Entities">
+            <End Role="Entities" EntitySet="Entities" />
+            <End Role="FieldValues" EntitySet="FieldValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Fields" Association="Self.FK_FieldValues_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="FieldValues" EntitySet="FieldValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_FK_Entities" Association="Self.FK_FieldValues_FK_Entities">
+            <End Role="Entities" EntitySet="Entities" />
+            <End Role="FieldValues_FK" EntitySet="FieldValues_FK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_FK_FieldValues" Association="Self.FK_FieldValues_FK_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_FK" EntitySet="FieldValues_FK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_FreeText_FieldValues" Association="Self.FK_FieldValues_FreeText_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_FreeText" EntitySet="FieldValues_FreeText" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Int_FieldValues" Association="Self.FK_FieldValues_Int_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_Int" EntitySet="FieldValues_Int" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Text_FieldValues" Association="Self.FK_FieldValues_Text_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_Text" EntitySet="FieldValues_Text" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LayoutFields_Fields" Association="Self.FK_LayoutFields_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="LayoutFields" EntitySet="LayoutFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LayoutFields_Layouts" Association="Self.FK_LayoutFields_Layouts">
+            <End Role="Layouts" EntitySet="Layouts" />
+            <End Role="LayoutFields" EntitySet="LayoutFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Layouts_EntityTypes" Association="Self.FK_Layouts_EntityTypes">
+            <End Role="EntityTypes" EntitySet="EntityTypes" />
+            <End Role="Layouts" EntitySet="Layouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItems_Menus" Association="Self.FK_MenuItems_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="MenuItems" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItems_Pages" Association="Self.FK_MenuItems_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="MenuItems" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_MenuItems" Association="Self.FK_Menus_MenuItems">
+            <End Role="MenuItems" EntitySet="MenuItems" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pages_Layouts" Association="Self.FK_Pages_Layouts">
+            <End Role="Layouts" EntitySet="Layouts" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pages_PageTypes" Association="Self.FK_Pages_PageTypes">
+            <End Role="PageTypes" EntitySet="PageTypes" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pages_Sections" Association="Self.FK_Pages_Sections">
+            <End Role="Sections" EntitySet="Sections" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightEntityTypes_EntityTypes" Association="Self.FK_RightEntityTypes_EntityTypes">
+            <End Role="EntityTypes" EntitySet="EntityTypes" />
+            <End Role="RightEntityTypes" EntitySet="RightEntityTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightEntityTypes_Permissions" Association="Self.FK_RightEntityTypes_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="RightEntityTypes" EntitySet="RightEntityTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightEntityTypes_Rights" Association="Self.FK_RightEntityTypes_Rights">
+            <End Role="Rights" EntitySet="Rights" />
+            <End Role="RightEntityTypes" EntitySet="RightEntityTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightFields_Permissions" Association="Self.FK_RightFields_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="RightFields" EntitySet="RightFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightFields_RightFields" Association="Self.FK_RightFields_RightFields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="RightFields" EntitySet="RightFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightFields_Rights" Association="Self.FK_RightFields_Rights">
+            <End Role="Rights" EntitySet="Rights" />
+            <End Role="RightFields" EntitySet="RightFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightPages_Pages" Association="Self.FK_RightPages_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="RightPages" EntitySet="RightPages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightPages_Permissions" Association="Self.FK_RightPages_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="RightPages" EntitySet="RightPages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightPages_Rights" Association="Self.FK_RightPages_Rights">
+            <End Role="Rights" EntitySet="Rights" />
+            <End Role="RightPages" EntitySet="RightPages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleRights_Rights" Association="Self.FK_RoleRights_Rights">
+            <End Role="Rights" EntitySet="Rights" />
+            <End Role="RoleRights" EntitySet="RoleRights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleRights_Roles" Association="Self.FK_RoleRights_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RoleRights" EntitySet="RoleRights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sections_Menus" Association="Self.FK_Sections_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Sections" EntitySet="Sections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEntities_Entities" Association="Self.FK_UserEntities_Entities">
+            <End Role="Entities" EntitySet="Entities" />
+            <End Role="UserEntities" EntitySet="UserEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEntities_Permissions" Association="Self.FK_UserEntities_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="UserEntities" EntitySet="UserEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEntities_Users" Association="Self.FK_UserEntities_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserEntities" EntitySet="UserEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Roles" Association="Self.FK_UserRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Users" Association="Self.FK_UserRoles_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Aplomb.Common.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Entity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EntityType" Relationship="Self.FK_Entities_EntityTypes" FromRole="Entities" ToRole="EntityTypes" />
+          <NavigationProperty Name="FieldValues" Relationship="Self.FK_FieldValues_Entities" FromRole="Entities" ToRole="FieldValues" />
+          <NavigationProperty Name="FieldValues_FK" Relationship="Self.FK_FieldValues_FK_Entities" FromRole="Entities" ToRole="FieldValues_FK" />
+          <NavigationProperty Name="UserEntities" Relationship="Self.FK_UserEntities_Entities" FromRole="Entities" ToRole="UserEntities" />
+        </EntityType>
+        <EntityType Name="EntityType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Entities" Relationship="Self.FK_Entities_EntityTypes" FromRole="EntityTypes" ToRole="Entities" />
+          <NavigationProperty Name="Fields" Relationship="Self.FK_Fields_EntityTypes" FromRole="EntityTypes" ToRole="Fields" />
+          <NavigationProperty Name="RightEntityTypes" Relationship="Self.FK_RightEntityTypes_EntityTypes" FromRole="EntityTypes" ToRole="RightEntityTypes" />
+          <NavigationProperty Name="Layouts" Relationship="Aplomb.Common.Models.FK_Layouts_EntityTypes" FromRole="EntityType" ToRole="Layout" />
+          <NavigationProperty Name="DataDiagramEntityTypes" Relationship="Aplomb.Common.Models.FK_DataDiagramEntityTypes_EntityTypes" FromRole="EntityType" ToRole="DataDiagramEntityType" />
+        </EntityType>
+        <EntityType Name="Field">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntityTypeID" Type="Int32" Nullable="false" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MinNumber" Type="Int32" Nullable="false" />
+          <Property Name="MaxNumber" Type="Int32" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="ExtraInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EntityType" Relationship="Self.FK_Fields_EntityTypes" FromRole="Fields" ToRole="EntityTypes" />
+          <NavigationProperty Name="FieldType" Relationship="Self.FK_Fields_FieldTypes" FromRole="Fields" ToRole="FieldTypes" />
+          <NavigationProperty Name="FieldValues" Relationship="Self.FK_FieldValues_Fields" FromRole="Fields" ToRole="FieldValues" />
+          <NavigationProperty Name="RightFields" Relationship="Self.FK_RightFields_RightFields" FromRole="Fields" ToRole="RightFields" />
+          <NavigationProperty Name="LayoutFields" Relationship="Aplomb.Common.Models.FK_LayoutFields_Fields" FromRole="Field" ToRole="LayoutField" />
+        </EntityType>
+        <EntityType Name="FieldType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ValueTableName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="ExtraInfoFields" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Fields" Relationship="Self.FK_Fields_FieldTypes" FromRole="FieldTypes" ToRole="Fields" />
+        </EntityType>
+        <EntityType Name="FieldValue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntityID" Type="Int32" Nullable="false" />
+          <Property Name="FieldID" Type="Int32" Nullable="false" />
+          <Property Name="FieldNumber" Type="Int32" Nullable="false" />
+          <Property Name="ValueNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Entity" Relationship="Self.FK_FieldValues_Entities" FromRole="FieldValues" ToRole="Entities" />
+          <NavigationProperty Name="Field" Relationship="Self.FK_FieldValues_Fields" FromRole="FieldValues" ToRole="Fields" />
+          <NavigationProperty Name="FieldValues_Bit" Relationship="Self.FK_FieldValues_Bit_FieldValues" FromRole="FieldValues" ToRole="FieldValues_Bit" />
+          <NavigationProperty Name="FieldValues_Date" Relationship="Self.FK_FieldValues_Date_FieldValues" FromRole="FieldValues" ToRole="FieldValues_Date" />
+          <NavigationProperty Name="FieldValues_Decimal" Relationship="Self.FK_FieldValues_Decimal_FieldValues" FromRole="FieldValues" ToRole="FieldValues_Decimal" />
+          <NavigationProperty Name="FieldValues_FK" Relationship="Self.FK_FieldValues_FK_FieldValues" FromRole="FieldValues" ToRole="FieldValues_FK" />
+          <NavigationProperty Name="FieldValues_Int" Relationship="Self.FK_FieldValues_Int_FieldValues" FromRole="FieldValues" ToRole="FieldValues_Int" />
+          <NavigationProperty Name="FieldValues_FreeText" Relationship="Aplomb.Common.Models.FK_FieldValues_FreeText_FieldValues" FromRole="FieldValue" ToRole="FieldValues_FreeText" />
+          <NavigationProperty Name="FieldValues_Text" Relationship="Aplomb.Common.Models.FK_FieldValues_Text_FieldValues" FromRole="FieldValue" ToRole="FieldValues_Text" />
+        </EntityType>
+        <EntityType Name="FieldValue_Bit">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FieldValue" Relationship="Self.FK_FieldValues_Bit_FieldValues" FromRole="FieldValues_Bit" ToRole="FieldValues" />
+        </EntityType>
+        <EntityType Name="FieldValue_Date">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FieldValue" Relationship="Self.FK_FieldValues_Date_FieldValues" FromRole="FieldValues_Date" ToRole="FieldValues" />
+        </EntityType>
+        <EntityType Name="FieldValue_Decimal">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <NavigationProperty Name="FieldValue" Relationship="Self.FK_FieldValues_Decimal_FieldValues" FromRole="FieldValues_Decimal" ToRole="FieldValues" />
+        </EntityType>
+        <EntityType Name="FieldValue_FK">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <Property Name="IsChild" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Entity" Relationship="Self.FK_FieldValues_FK_Entities" FromRole="FieldValues_FK" ToRole="Entities" />
+          <NavigationProperty Name="FieldValue" Relationship="Self.FK_FieldValues_FK_FieldValues" FromRole="FieldValues_FK" ToRole="FieldValues" />
+        </EntityType>
+        <EntityType Name="FieldValue_Int">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FieldValue" Relationship="Self.FK_FieldValues_Int_FieldValues" FromRole="FieldValues_Int" ToRole="FieldValues" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CanView" Type="Boolean" Nullable="false" />
+          <Property Name="CanEdit" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="RightEntityTypes" Relationship="Self.FK_RightEntityTypes_Permissions" FromRole="Permissions" ToRole="RightEntityTypes" />
+          <NavigationProperty Name="RightFields" Relationship="Self.FK_RightFields_Permissions" FromRole="Permissions" ToRole="RightFields" />
+          <NavigationProperty Name="RightPages" Relationship="Aplomb.Common.Models.FK_RightPages_Permissions" FromRole="Permission" ToRole="RightPage" />
+          <NavigationProperty Name="UserEntities" Relationship="Aplomb.Common.Models.FK_UserEntities_Permissions" FromRole="Permission" ToRole="UserEntity" />
+        </EntityType>
+        <EntityType Name="RightEntityType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RightID" Type="Int32" Nullable="false" />
+          <Property Name="EntityTypeID" Type="Int32" Nullable="false" />
+          <Property Name="PermissionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EntityType" Relationship="Self.FK_RightEntityTypes_EntityTypes" FromRole="RightEntityTypes" ToRole="EntityTypes" />
+          <NavigationProperty Name="Permission" Relationship="Self.FK_RightEntityTypes_Permissions" FromRole="RightEntityTypes" ToRole="Permissions" />
+          <NavigationProperty Name="Right" Relationship="Self.FK_RightEntityTypes_Rights" FromRole="RightEntityTypes" ToRole="Rights" />
+        </EntityType>
+        <EntityType Name="RightField">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RightID" Type="Int32" Nullable="false" />
+          <Property Name="FieldID" Type="Int32" Nullable="false" />
+          <Property Name="PermissionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Field" Relationship="Self.FK_RightFields_RightFields" FromRole="RightFields" ToRole="Fields" />
+          <NavigationProperty Name="Permission" Relationship="Self.FK_RightFields_Permissions" FromRole="RightFields" ToRole="Permissions" />
+          <NavigationProperty Name="Right" Relationship="Self.FK_RightFields_Rights" FromRole="RightFields" ToRole="Rights" />
+        </EntityType>
+        <EntityType Name="Right">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RightEntityTypes" Relationship="Self.FK_RightEntityTypes_Rights" FromRole="Rights" ToRole="RightEntityTypes" />
+          <NavigationProperty Name="RightFields" Relationship="Self.FK_RightFields_Rights" FromRole="Rights" ToRole="RightFields" />
+          <NavigationProperty Name="RoleRights" Relationship="Self.FK_RoleRights_Rights" FromRole="Rights" ToRole="RoleRights" />
+          <NavigationProperty Name="RightPages" Relationship="Aplomb.Common.Models.FK_RightPages_Rights" FromRole="Right" ToRole="RightPage" />
+        </EntityType>
+        <EntityType Name="RoleRight">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="RightID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Right" Relationship="Self.FK_RoleRights_Rights" FromRole="RoleRights" ToRole="Rights" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_RoleRights_Roles" FromRole="RoleRights" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RoleRights" Relationship="Self.FK_RoleRights_Roles" FromRole="Roles" ToRole="RoleRights" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRoles_Roles" FromRole="Roles" ToRole="UserRoles" />
+        </EntityType>
+        <EntityType Name="UserEntity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="EntityID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Entity" Relationship="Self.FK_UserEntities_Entities" FromRole="UserEntities" ToRole="Entities" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserEntities_Users" FromRole="UserEntities" ToRole="Users" />
+          <Property Name="PermissionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Permission" Relationship="Aplomb.Common.Models.FK_UserEntities_Permissions" FromRole="UserEntity" ToRole="Permission" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_UserRoles_Roles" FromRole="UserRoles" ToRole="Roles" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserRoles_Users" FromRole="UserRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserEntities" Relationship="Self.FK_UserEntities_Users" FromRole="Users" ToRole="UserEntities" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRoles_Users" FromRole="Users" ToRole="UserRoles" />
+        </EntityType>
+        <Association Name="FK_Entities_EntityTypes">
+          <End Role="EntityTypes" Type="Self.EntityType" Multiplicity="1" />
+          <End Role="Entities" Type="Self.Entity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Entities">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Entities">
+          <End Role="Entities" Type="Self.Entity" Multiplicity="1" />
+          <End Role="FieldValues" Type="Self.FieldValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entities">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues">
+              <PropertyRef Name="EntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_FK_Entities">
+          <End Role="Entities" Type="Self.Entity" Multiplicity="1" />
+          <End Role="FieldValues_FK" Type="Aplomb.Common.Models.FieldValue_FK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entities">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_FK">
+              <PropertyRef Name="Value" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEntities_Entities">
+          <End Role="Entities" Type="Self.Entity" Multiplicity="1" />
+          <End Role="UserEntities" Type="Self.UserEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entities">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserEntities">
+              <PropertyRef Name="EntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fields_EntityTypes">
+          <End Role="EntityTypes" Type="Self.EntityType" Multiplicity="1" />
+          <End Role="Fields" Type="Self.Field" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Fields">
+              <PropertyRef Name="EntityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightEntityTypes_EntityTypes">
+          <End Role="EntityTypes" Type="Self.EntityType" Multiplicity="1" />
+          <End Role="RightEntityTypes" Type="Self.RightEntityType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightEntityTypes">
+              <PropertyRef Name="EntityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fields_FieldTypes">
+          <End Role="FieldTypes" Type="Self.FieldType" Multiplicity="1" />
+          <End Role="Fields" Type="Self.Field" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FieldTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Fields">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Fields">
+          <End Role="Fields" Type="Self.Field" Multiplicity="1" />
+          <End Role="FieldValues" Type="Self.FieldValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightFields_RightFields">
+          <End Role="Fields" Type="Self.Field" Multiplicity="1" />
+          <End Role="RightFields" Type="Self.RightField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightFields">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Bit_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValue" Multiplicity="1" />
+          <End Role="FieldValues_Bit" Type="Aplomb.Common.Models.FieldValue_Bit" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_Bit">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Date_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValue" Multiplicity="1" />
+          <End Role="FieldValues_Date" Type="Aplomb.Common.Models.FieldValue_Date" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_Date">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Decimal_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValue" Multiplicity="1" />
+          <End Role="FieldValues_Decimal" Type="Aplomb.Common.Models.FieldValue_Decimal" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_Decimal">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_FK_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValue" Multiplicity="1" />
+          <End Role="FieldValues_FK" Type="Aplomb.Common.Models.FieldValue_FK" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_FK">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Int_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValue" Multiplicity="1" />
+          <End Role="FieldValues_Int" Type="Aplomb.Common.Models.FieldValue_Int" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_Int">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightEntityTypes_Permissions">
+          <End Role="Permissions" Type="Self.Permission" Multiplicity="1" />
+          <End Role="RightEntityTypes" Type="Self.RightEntityType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightEntityTypes">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightFields_Permissions">
+          <End Role="Permissions" Type="Self.Permission" Multiplicity="1" />
+          <End Role="RightFields" Type="Self.RightField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightFields">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightEntityTypes_Rights">
+          <End Role="Rights" Type="Self.Right" Multiplicity="1" />
+          <End Role="RightEntityTypes" Type="Self.RightEntityType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rights">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightEntityTypes">
+              <PropertyRef Name="RightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightFields_Rights">
+          <End Role="Rights" Type="Self.Right" Multiplicity="1" />
+          <End Role="RightFields" Type="Self.RightField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rights">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightFields">
+              <PropertyRef Name="RightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleRights_Rights">
+          <End Role="Rights" Type="Self.Right" Multiplicity="1" />
+          <End Role="RoleRights" Type="Self.RoleRight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rights">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RoleRights">
+              <PropertyRef Name="RightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleRights_Roles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="RoleRights" Type="Self.RoleRight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RoleRights">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Roles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEntities_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserEntities" Type="Self.UserEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserEntities">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Entities" EntityType="Self.Entity" />
+          <EntitySet Name="EntityTypes" EntityType="Self.EntityType" />
+          <EntitySet Name="Fields" EntityType="Self.Field" />
+          <EntitySet Name="FieldTypes" EntityType="Self.FieldType" />
+          <EntitySet Name="FieldValues" EntityType="Self.FieldValue" />
+          <EntitySet Name="FieldValue_Bit" EntityType="Aplomb.Common.Models.FieldValue_Bit" />
+          <EntitySet Name="FieldValue_Date" EntityType="Aplomb.Common.Models.FieldValue_Date" />
+          <EntitySet Name="FieldValue_Decimal" EntityType="Aplomb.Common.Models.FieldValue_Decimal" />
+          <EntitySet Name="FieldValue_FK" EntityType="Aplomb.Common.Models.FieldValue_FK" />
+          <EntitySet Name="FieldValue_Int" EntityType="Aplomb.Common.Models.FieldValue_Int" />
+          <EntitySet Name="Permissions" EntityType="Self.Permission" />
+          <EntitySet Name="RightEntityTypes" EntityType="Self.RightEntityType" />
+          <EntitySet Name="RightFields" EntityType="Self.RightField" />
+          <EntitySet Name="Rights" EntityType="Self.Right" />
+          <EntitySet Name="RoleRights" EntityType="Self.RoleRight" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="UserEntities" EntityType="Self.UserEntity" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Entities_EntityTypes" Association="Self.FK_Entities_EntityTypes">
+            <End Role="EntityTypes" EntitySet="EntityTypes" />
+            <End Role="Entities" EntitySet="Entities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Entities" Association="Self.FK_FieldValues_Entities">
+            <End Role="Entities" EntitySet="Entities" />
+            <End Role="FieldValues" EntitySet="FieldValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_FK_Entities" Association="Self.FK_FieldValues_FK_Entities">
+            <End Role="Entities" EntitySet="Entities" />
+            <End Role="FieldValues_FK" EntitySet="FieldValue_FK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEntities_Entities" Association="Self.FK_UserEntities_Entities">
+            <End Role="Entities" EntitySet="Entities" />
+            <End Role="UserEntities" EntitySet="UserEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fields_EntityTypes" Association="Self.FK_Fields_EntityTypes">
+            <End Role="EntityTypes" EntitySet="EntityTypes" />
+            <End Role="Fields" EntitySet="Fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightEntityTypes_EntityTypes" Association="Self.FK_RightEntityTypes_EntityTypes">
+            <End Role="EntityTypes" EntitySet="EntityTypes" />
+            <End Role="RightEntityTypes" EntitySet="RightEntityTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fields_FieldTypes" Association="Self.FK_Fields_FieldTypes">
+            <End Role="FieldTypes" EntitySet="FieldTypes" />
+            <End Role="Fields" EntitySet="Fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Fields" Association="Self.FK_FieldValues_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="FieldValues" EntitySet="FieldValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightFields_RightFields" Association="Self.FK_RightFields_RightFields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="RightFields" EntitySet="RightFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Bit_FieldValues" Association="Self.FK_FieldValues_Bit_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_Bit" EntitySet="FieldValue_Bit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Date_FieldValues" Association="Self.FK_FieldValues_Date_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_Date" EntitySet="FieldValue_Date" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Decimal_FieldValues" Association="Self.FK_FieldValues_Decimal_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_Decimal" EntitySet="FieldValue_Decimal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_FK_FieldValues" Association="Self.FK_FieldValues_FK_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_FK" EntitySet="FieldValue_FK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Int_FieldValues" Association="Self.FK_FieldValues_Int_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_Int" EntitySet="FieldValue_Int" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightEntityTypes_Permissions" Association="Self.FK_RightEntityTypes_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="RightEntityTypes" EntitySet="RightEntityTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightFields_Permissions" Association="Self.FK_RightFields_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="RightFields" EntitySet="RightFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightEntityTypes_Rights" Association="Self.FK_RightEntityTypes_Rights">
+            <End Role="Rights" EntitySet="Rights" />
+            <End Role="RightEntityTypes" EntitySet="RightEntityTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightFields_Rights" Association="Self.FK_RightFields_Rights">
+            <End Role="Rights" EntitySet="Rights" />
+            <End Role="RightFields" EntitySet="RightFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleRights_Rights" Association="Self.FK_RoleRights_Rights">
+            <End Role="Rights" EntitySet="Rights" />
+            <End Role="RoleRights" EntitySet="RoleRights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleRights_Roles" Association="Self.FK_RoleRights_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RoleRights" EntitySet="RoleRights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Roles" Association="Self.FK_UserRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEntities_Users" Association="Self.FK_UserEntities_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserEntities" EntitySet="UserEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Users" Association="Self.FK_UserRoles_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <EntitySet Name="LayoutFields" EntityType="Aplomb.Common.Models.LayoutField" />
+          <EntitySet Name="Layouts" EntityType="Aplomb.Common.Models.Layout" />
+          <AssociationSet Name="FK_Layouts_EntityTypes" Association="Aplomb.Common.Models.FK_Layouts_EntityTypes">
+            <End Role="EntityType" EntitySet="EntityTypes" />
+            <End Role="Layout" EntitySet="Layouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LayoutFields_Fields" Association="Aplomb.Common.Models.FK_LayoutFields_Fields">
+            <End Role="Field" EntitySet="Fields" />
+            <End Role="LayoutField" EntitySet="LayoutFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LayoutFields_Layouts" Association="Aplomb.Common.Models.FK_LayoutFields_Layouts">
+            <End Role="Layout" EntitySet="Layouts" />
+            <End Role="LayoutField" EntitySet="LayoutFields" />
+          </AssociationSet>
+          <EntitySet Name="MenuItems" EntityType="Aplomb.Common.Models.MenuItem" />
+          <EntitySet Name="Menus" EntityType="Aplomb.Common.Models.Menu" />
+          <EntitySet Name="Pages" EntityType="Aplomb.Common.Models.Page" />
+          <EntitySet Name="PageTypes" EntityType="Aplomb.Common.Models.PageType" />
+          <AssociationSet Name="FK_Pages_Layouts" Association="Aplomb.Common.Models.FK_Pages_Layouts">
+            <End Role="Layout" EntitySet="Layouts" />
+            <End Role="Page" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItems_Menus" Association="Aplomb.Common.Models.FK_MenuItems_Menus">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItems_Pages" Association="Aplomb.Common.Models.FK_MenuItems_Pages">
+            <End Role="Page" EntitySet="Pages" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pages_PageTypes" Association="Aplomb.Common.Models.FK_Pages_PageTypes">
+            <End Role="PageType" EntitySet="PageTypes" />
+            <End Role="Page" EntitySet="Pages" />
+          </AssociationSet>
+          <EntitySet Name="RightPages" EntityType="Aplomb.Common.Models.RightPage" />
+          <AssociationSet Name="FK_RightPages_Pages" Association="Aplomb.Common.Models.FK_RightPages_Pages">
+            <End Role="Page" EntitySet="Pages" />
+            <End Role="RightPage" EntitySet="RightPages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightPages_Permissions" Association="Aplomb.Common.Models.FK_RightPages_Permissions">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="RightPage" EntitySet="RightPages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEntities_Permissions" Association="Aplomb.Common.Models.FK_UserEntities_Permissions">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="UserEntity" EntitySet="UserEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RightPages_Rights" Association="Aplomb.Common.Models.FK_RightPages_Rights">
+            <End Role="Right" EntitySet="Rights" />
+            <End Role="RightPage" EntitySet="RightPages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_MenuItems" Association="Aplomb.Common.Models.FK_Menus_MenuItems">
+            <End Role="MenuItem" EntitySet="MenuItems" />
+            <End Role="Menu" EntitySet="Menus" />
+          </AssociationSet>
+          <EntitySet Name="Sections" EntityType="Aplomb.Common.Models.Section" />
+          <AssociationSet Name="FK_Pages_Sections" Association="Aplomb.Common.Models.FK_Pages_Sections">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Page" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sections_Menus" Association="Aplomb.Common.Models.FK_Sections_Menus">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Section" EntitySet="Sections" />
+          </AssociationSet>
+          <EntitySet Name="DataDiagramEntityTypes" EntityType="Aplomb.Common.Models.DataDiagramEntityType" />
+          <EntitySet Name="DataDiagrams" EntityType="Aplomb.Common.Models.DataDiagram" />
+          <AssociationSet Name="FK_DataDiagramEntityTypes_DataDiagrams" Association="Aplomb.Common.Models.FK_DataDiagramEntityTypes_DataDiagrams">
+            <End Role="DataDiagram" EntitySet="DataDiagrams" />
+            <End Role="DataDiagramEntityType" EntitySet="DataDiagramEntityTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DataDiagramEntityTypes_EntityTypes" Association="Aplomb.Common.Models.FK_DataDiagramEntityTypes_EntityTypes">
+            <End Role="EntityType" EntitySet="EntityTypes" />
+            <End Role="DataDiagramEntityType" EntitySet="DataDiagramEntityTypes" />
+          </AssociationSet>
+          <EntitySet Name="FieldValues_FreeText" EntityType="Aplomb.Common.Models.FieldValues_FreeText" />
+          <EntitySet Name="FieldValues_Text" EntityType="Aplomb.Common.Models.FieldValues_Text" />
+          <AssociationSet Name="FK_FieldValues_FreeText_FieldValues" Association="Aplomb.Common.Models.FK_FieldValues_FreeText_FieldValues">
+            <End Role="FieldValue" EntitySet="FieldValues" />
+            <End Role="FieldValues_FreeText" EntitySet="FieldValues_FreeText" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Text_FieldValues" Association="Aplomb.Common.Models.FK_FieldValues_Text_FieldValues">
+            <End Role="FieldValue" EntitySet="FieldValues" />
+            <End Role="FieldValues_Text" EntitySet="FieldValues_Text" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="LayoutField">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LayoutID" Type="Int32" Nullable="false" />
+          <Property Name="FieldID" Type="Int32" Nullable="false" />
+          <Property Name="NameOverride" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Field" Relationship="Aplomb.Common.Models.FK_LayoutFields_Fields" FromRole="LayoutField" ToRole="Field" />
+          <NavigationProperty Name="Layout" Relationship="Aplomb.Common.Models.FK_LayoutFields_Layouts" FromRole="LayoutField" ToRole="Layout" />
+        </EntityType>
+        <EntityType Name="Layout">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="EntityTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EntityType" Relationship="Aplomb.Common.Models.FK_Layouts_EntityTypes" FromRole="Layout" ToRole="EntityType" />
+          <NavigationProperty Name="LayoutFields" Relationship="Aplomb.Common.Models.FK_LayoutFields_Layouts" FromRole="Layout" ToRole="LayoutField" />
+          <NavigationProperty Name="Pages" Relationship="Aplomb.Common.Models.FK_Pages_Layouts" FromRole="Layout" ToRole="Page" />
+        </EntityType>
+        <Association Name="FK_Layouts_EntityTypes">
+          <End Type="Aplomb.Common.Models.EntityType" Role="EntityType" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.Layout" Role="Layout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Layout">
+              <PropertyRef Name="EntityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LayoutFields_Fields">
+          <End Type="Aplomb.Common.Models.Field" Role="Field" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.LayoutField" Role="LayoutField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Field">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LayoutField">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LayoutFields_Layouts">
+          <End Type="Aplomb.Common.Models.Layout" Role="Layout" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.LayoutField" Role="LayoutField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layout">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LayoutField">
+              <PropertyRef Name="LayoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuID" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PageID" Type="Int32" />
+          <NavigationProperty Name="Menu" Relationship="Aplomb.Common.Models.FK_MenuItems_Menus" FromRole="MenuItem" ToRole="Menu" />
+          <NavigationProperty Name="Page" Relationship="Aplomb.Common.Models.FK_MenuItems_Pages" FromRole="MenuItem" ToRole="Page" />
+          <NavigationProperty Name="ChildMenus" Relationship="Aplomb.Common.Models.FK_Menus_MenuItems" FromRole="MenuItem" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MenuItems" Relationship="Aplomb.Common.Models.FK_MenuItems_Menus" FromRole="Menu" ToRole="MenuItem" />
+          <Property Name="ParentMenuItemID" Type="Int32" />
+          <NavigationProperty Name="ParentMenuItem" Relationship="Aplomb.Common.Models.FK_Menus_MenuItems" FromRole="Menu" ToRole="MenuItem" />
+          <NavigationProperty Name="Sections" Relationship="Aplomb.Common.Models.FK_Sections_Menus" FromRole="Menu" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageTypeID" Type="Int32" Nullable="false" />
+          <Property Name="LayoutID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Slug" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Layout" Relationship="Aplomb.Common.Models.FK_Pages_Layouts" FromRole="Page" ToRole="Layout" />
+          <NavigationProperty Name="MenuItems" Relationship="Aplomb.Common.Models.FK_MenuItems_Pages" FromRole="Page" ToRole="MenuItem" />
+          <NavigationProperty Name="PageType" Relationship="Aplomb.Common.Models.FK_Pages_PageTypes" FromRole="Page" ToRole="PageType" />
+          <NavigationProperty Name="RightPages" Relationship="Aplomb.Common.Models.FK_RightPages_Pages" FromRole="Page" ToRole="RightPage" />
+          <Property Name="SectionID" Type="Int32" />
+          <NavigationProperty Name="Section" Relationship="Aplomb.Common.Models.FK_Pages_Sections" FromRole="Page" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="PageType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pages" Relationship="Aplomb.Common.Models.FK_Pages_PageTypes" FromRole="PageType" ToRole="Page" />
+        </EntityType>
+        <Association Name="FK_Pages_Layouts">
+          <End Type="Aplomb.Common.Models.Layout" Role="Layout" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.Page" Role="Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layout">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="LayoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItems_Menus">
+          <End Type="Aplomb.Common.Models.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.MenuItem" Role="MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItems_Pages">
+          <End Type="Aplomb.Common.Models.Page" Role="Page" Multiplicity="0..1" />
+          <End Type="Aplomb.Common.Models.MenuItem" Role="MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pages_PageTypes">
+          <End Type="Aplomb.Common.Models.PageType" Role="PageType" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.Page" Role="Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PageType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="PageTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RightPage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RightID" Type="Int32" Nullable="false" />
+          <Property Name="PageID" Type="Int32" Nullable="false" />
+          <Property Name="PermissionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Page" Relationship="Aplomb.Common.Models.FK_RightPages_Pages" FromRole="RightPage" ToRole="Page" />
+          <NavigationProperty Name="Permission" Relationship="Aplomb.Common.Models.FK_RightPages_Permissions" FromRole="RightPage" ToRole="Permission" />
+          <NavigationProperty Name="Right" Relationship="Aplomb.Common.Models.FK_RightPages_Rights" FromRole="RightPage" ToRole="Right" />
+        </EntityType>
+        <Association Name="FK_RightPages_Pages">
+          <End Type="Aplomb.Common.Models.Page" Role="Page" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.RightPage" Role="RightPage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightPage">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightPages_Permissions">
+          <End Type="Aplomb.Common.Models.Permission" Role="Permission" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.RightPage" Role="RightPage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightPage">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEntities_Permissions">
+          <End Type="Aplomb.Common.Models.Permission" Role="Permission" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.UserEntity" Role="UserEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserEntity">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RightPages_Rights">
+          <End Type="Aplomb.Common.Models.Right" Role="Right" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.RightPage" Role="RightPage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Right">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RightPage">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_MenuItems">
+          <End Type="Aplomb.Common.Models.MenuItem" Role="MenuItem" Multiplicity="0..1" />
+          <End Type="Aplomb.Common.Models.Menu" Role="Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="ParentMenuItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Slug" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pages" Relationship="Aplomb.Common.Models.FK_Pages_Sections" FromRole="Section" ToRole="Page" />
+          <Property Name="MenuID" Type="Int32" />
+          <NavigationProperty Name="Menu" Relationship="Aplomb.Common.Models.FK_Sections_Menus" FromRole="Section" ToRole="Menu" />
+        </EntityType>
+        <Association Name="FK_Pages_Sections">
+          <End Type="Aplomb.Common.Models.Section" Role="Section" Multiplicity="0..1" />
+          <End Type="Aplomb.Common.Models.Page" Role="Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sections_Menus">
+          <End Type="Aplomb.Common.Models.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="Aplomb.Common.Models.Section" Role="Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DataDiagramEntityType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataDiagramID" Type="Int32" Nullable="false" />
+          <Property Name="EntityTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="PositionX" Type="Double" Nullable="false" />
+          <Property Name="PositionY" Type="Double" Nullable="false" />
+          <NavigationProperty Name="DataDiagram" Relationship="Aplomb.Common.Models.FK_DataDiagramEntityTypes_DataDiagrams" FromRole="DataDiagramEntityType" ToRole="DataDiagram" />
+          <NavigationProperty Name="EntityType" Relationship="Aplomb.Common.Models.FK_DataDiagramEntityTypes_EntityTypes" FromRole="DataDiagramEntityType" ToRole="EntityType" />
+        </EntityType>
+        <EntityType Name="DataDiagram">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DataDiagramEntityTypes" Relationship="Aplomb.Common.Models.FK_DataDiagramEntityTypes_DataDiagrams" FromRole="DataDiagram" ToRole="DataDiagramEntityType" />
+        </EntityType>
+        <Association Name="FK_DataDiagramEntityTypes_DataDiagrams">
+          <End Type="Aplomb.Common.Models.DataDiagram" Role="DataDiagram" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.DataDiagramEntityType" Role="DataDiagramEntityType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DataDiagram">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DataDiagramEntityType">
+              <PropertyRef Name="DataDiagramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DataDiagramEntityTypes_EntityTypes">
+          <End Type="Aplomb.Common.Models.EntityType" Role="EntityType" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.DataDiagramEntityType" Role="DataDiagramEntityType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DataDiagramEntityType">
+              <PropertyRef Name="EntityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FieldValues_FreeText">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FieldValue" Relationship="Aplomb.Common.Models.FK_FieldValues_FreeText_FieldValues" FromRole="FieldValues_FreeText" ToRole="FieldValue" />
+        </EntityType>
+        <EntityType Name="FieldValues_Text">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FieldValue" Relationship="Aplomb.Common.Models.FK_FieldValues_Text_FieldValues" FromRole="FieldValues_Text" ToRole="FieldValue" />
+        </EntityType>
+        <Association Name="FK_FieldValues_FreeText_FieldValues">
+          <End Type="Aplomb.Common.Models.FieldValue" Role="FieldValue" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.FieldValues_FreeText" Role="FieldValues_FreeText" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValue">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_FreeText">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Text_FieldValues">
+          <End Type="Aplomb.Common.Models.FieldValue" Role="FieldValue" Multiplicity="1" />
+          <End Type="Aplomb.Common.Models.FieldValues_Text" Role="FieldValues_Text" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValue">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_Text">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AplombModelsStoreContainer" CdmEntityContainer="DataModel">
+          <EntitySetMapping Name="Entities">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.Entity">
+              <MappingFragment StoreEntitySet="Entities">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntityTypes">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.EntityType">
+              <MappingFragment StoreEntitySet="EntityTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fields">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.Field">
+              <MappingFragment StoreEntitySet="Fields">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EntityTypeID" ColumnName="EntityTypeID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MinNumber" ColumnName="MinNumber" />
+                <ScalarProperty Name="MaxNumber" ColumnName="MaxNumber" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="ExtraInfo" ColumnName="ExtraInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldTypes">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.FieldType">
+              <MappingFragment StoreEntitySet="FieldTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ValueTableName" ColumnName="ValueTableName" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="ExtraInfoFields" ColumnName="ExtraInfoFields" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldValues">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.FieldValue">
+              <MappingFragment StoreEntitySet="FieldValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+                <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+                <ScalarProperty Name="FieldNumber" ColumnName="FieldNumber" />
+                <ScalarProperty Name="ValueNumber" ColumnName="ValueNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldValue_Bit">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.FieldValue_Bit">
+              <MappingFragment StoreEntitySet="FieldValues_Bit">
+                <ScalarProperty Name="FieldValueID" ColumnName="FieldValueID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldValue_Date">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.FieldValue_Date">
+              <MappingFragment StoreEntitySet="FieldValues_Date">
+                <ScalarProperty Name="FieldValueID" ColumnName="FieldValueID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldValue_Decimal">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.FieldValue_Decimal">
+              <MappingFragment StoreEntitySet="FieldValues_Decimal">
+                <ScalarProperty Name="FieldValueID" ColumnName="FieldValueID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldValue_FK">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.FieldValue_FK">
+              <MappingFragment StoreEntitySet="FieldValues_FK">
+                <ScalarProperty Name="FieldValueID" ColumnName="FieldValueID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="IsChild" ColumnName="IsChild" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldValue_Int">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.FieldValue_Int">
+              <MappingFragment StoreEntitySet="FieldValues_Int">
+                <ScalarProperty Name="FieldValueID" ColumnName="FieldValueID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.Permission">
+              <MappingFragment StoreEntitySet="Permissions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CanView" ColumnName="CanView" />
+                <ScalarProperty Name="CanEdit" ColumnName="CanEdit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RightEntityTypes">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.RightEntityType">
+              <MappingFragment StoreEntitySet="RightEntityTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RightID" ColumnName="RightID" />
+                <ScalarProperty Name="EntityTypeID" ColumnName="EntityTypeID" />
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RightFields">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.RightField">
+              <MappingFragment StoreEntitySet="RightFields">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RightID" ColumnName="RightID" />
+                <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rights">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.Right">
+              <MappingFragment StoreEntitySet="Rights">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleRights">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.RoleRight">
+              <MappingFragment StoreEntitySet="RoleRights">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RightID" ColumnName="RightID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserEntities">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.UserEntity">
+              <MappingFragment StoreEntitySet="UserEntities">
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LayoutFields">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.LayoutField">
+              <MappingFragment StoreEntitySet="LayoutFields">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="NameOverride" ColumnName="NameOverride" />
+                <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+                <ScalarProperty Name="LayoutID" ColumnName="LayoutID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Layouts">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.Layout">
+              <MappingFragment StoreEntitySet="Layouts">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EntityTypeID" ColumnName="EntityTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuItems">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.MenuItem">
+              <MappingFragment StoreEntitySet="MenuItems">
+                <ScalarProperty Name="PageID" ColumnName="PageID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.Menu">
+              <MappingFragment StoreEntitySet="Menus">
+                <ScalarProperty Name="ParentMenuItemID" ColumnName="ParentMenuItemID" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.Page">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="LayoutID" ColumnName="LayoutID" />
+                <ScalarProperty Name="PageTypeID" ColumnName="PageTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PageTypes">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.PageType">
+              <MappingFragment StoreEntitySet="PageTypes">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RightPages">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.RightPage">
+              <MappingFragment StoreEntitySet="RightPages">
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+                <ScalarProperty Name="PageID" ColumnName="PageID" />
+                <ScalarProperty Name="RightID" ColumnName="RightID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.Section">
+              <MappingFragment StoreEntitySet="Sections">
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DataDiagramEntityTypes">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.DataDiagramEntityType">
+              <MappingFragment StoreEntitySet="DataDiagramEntityTypes">
+                <ScalarProperty Name="PositionY" ColumnName="PositionY" />
+                <ScalarProperty Name="PositionX" ColumnName="PositionX" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="EntityTypeID" ColumnName="EntityTypeID" />
+                <ScalarProperty Name="DataDiagramID" ColumnName="DataDiagramID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DataDiagrams">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.DataDiagram">
+              <MappingFragment StoreEntitySet="DataDiagrams">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldValues_FreeText">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.FieldValues_FreeText">
+              <MappingFragment StoreEntitySet="FieldValues_FreeText">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="FieldValueID" ColumnName="FieldValueID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldValues_Text">
+            <EntityTypeMapping TypeName="Aplomb.Common.Models.FieldValues_Text">
+              <MappingFragment StoreEntitySet="FieldValues_Text">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="FieldValueID" ColumnName="FieldValueID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

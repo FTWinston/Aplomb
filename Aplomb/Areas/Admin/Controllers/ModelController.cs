@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Aplomb.Models;
 using Aplomb.Areas.Admin.Models;
 using System.Web.Script.Serialization;
+using Aplomb.Common.Models;
 
 namespace Aplomb.Areas.Admin.Controllers
 {
