@@ -76,6 +76,13 @@
           <Property Name="Value" Type="int" Nullable="false" />
           <Property Name="IsChild" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="FieldValues_FreeText">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="FieldValues_Int">
           <Key>
             <PropertyRef Name="FieldValueID" />
@@ -83,19 +90,12 @@
           <Property Name="FieldValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Value" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="FieldValues_LongText">
+        <EntityType Name="FieldValues_Text">
           <Key>
             <PropertyRef Name="FieldValueID" />
           </Key>
           <Property Name="FieldValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FieldValues_ShortText">
-          <Key>
-            <PropertyRef Name="FieldValueID" />
-          </Key>
-          <Property Name="FieldValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Value" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="DataDiagramEntityTypes">
           <Key>
@@ -413,6 +413,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FieldValues_FreeText_FieldValues">
+          <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="1" />
+          <End Role="FieldValues_FreeText" Type="Self.FieldValues_FreeText" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValues">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_FreeText">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FieldValues_Int_FieldValues">
           <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="1" />
           <End Role="FieldValues_Int" Type="Self.FieldValues_Int" Multiplicity="0..1" />
@@ -425,26 +437,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FieldValues_LongText_FieldValues">
+        <Association Name="FK_FieldValues_Text_FieldValues">
           <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="1" />
-          <End Role="FieldValues_LongText" Type="Self.FieldValues_LongText" Multiplicity="0..1" />
+          <End Role="FieldValues_Text" Type="Self.FieldValues_Text" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="FieldValues">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="FieldValues_LongText">
-              <PropertyRef Name="FieldValueID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FieldValues_ShortText_FieldValues">
-          <End Role="FieldValues" Type="Self.FieldValues" Multiplicity="1" />
-          <End Role="FieldValues_ShortText" Type="Self.FieldValues_ShortText" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="FieldValues">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="FieldValues_ShortText">
+            <Dependent Role="FieldValues_Text">
               <PropertyRef Name="FieldValueID" />
             </Dependent>
           </ReferentialConstraint>
@@ -771,9 +771,9 @@
           <EntitySet Name="FieldValues_Date" EntityType="Self.FieldValues_Date" Schema="data" store:Type="Tables" />
           <EntitySet Name="FieldValues_Decimal" EntityType="Self.FieldValues_Decimal" Schema="data" store:Type="Tables" />
           <EntitySet Name="FieldValues_FK" EntityType="Self.FieldValues_FK" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_FreeText" EntityType="Self.FieldValues_FreeText" Schema="data" store:Type="Tables" />
           <EntitySet Name="FieldValues_Int" EntityType="Self.FieldValues_Int" Schema="data" store:Type="Tables" />
-          <EntitySet Name="FieldValues_LongText" EntityType="Self.FieldValues_LongText" Schema="data" store:Type="Tables" />
-          <EntitySet Name="FieldValues_ShortText" EntityType="Self.FieldValues_ShortText" Schema="data" store:Type="Tables" />
+          <EntitySet Name="FieldValues_Text" EntityType="Self.FieldValues_Text" Schema="data" store:Type="Tables" />
           <EntitySet Name="DataDiagramEntityTypes" EntityType="Self.DataDiagramEntityTypes" Schema="model" store:Type="Tables" />
           <EntitySet Name="DataDiagrams" EntityType="Self.DataDiagrams" Schema="model" store:Type="Tables" />
           <EntitySet Name="EntityTypes" EntityType="Self.EntityTypes" Schema="model" store:Type="Tables" />
@@ -841,17 +841,17 @@
             <End Role="FieldValues" EntitySet="FieldValues" />
             <End Role="FieldValues_FK" EntitySet="FieldValues_FK" />
           </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_FreeText_FieldValues" Association="Self.FK_FieldValues_FreeText_FieldValues">
+            <End Role="FieldValues" EntitySet="FieldValues" />
+            <End Role="FieldValues_FreeText" EntitySet="FieldValues_FreeText" />
+          </AssociationSet>
           <AssociationSet Name="FK_FieldValues_Int_FieldValues" Association="Self.FK_FieldValues_Int_FieldValues">
             <End Role="FieldValues" EntitySet="FieldValues" />
             <End Role="FieldValues_Int" EntitySet="FieldValues_Int" />
           </AssociationSet>
-          <AssociationSet Name="FK_FieldValues_LongText_FieldValues" Association="Self.FK_FieldValues_LongText_FieldValues">
+          <AssociationSet Name="FK_FieldValues_Text_FieldValues" Association="Self.FK_FieldValues_Text_FieldValues">
             <End Role="FieldValues" EntitySet="FieldValues" />
-            <End Role="FieldValues_LongText" EntitySet="FieldValues_LongText" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FieldValues_ShortText_FieldValues" Association="Self.FK_FieldValues_ShortText_FieldValues">
-            <End Role="FieldValues" EntitySet="FieldValues" />
-            <End Role="FieldValues_ShortText" EntitySet="FieldValues_ShortText" />
+            <End Role="FieldValues_Text" EntitySet="FieldValues_Text" />
           </AssociationSet>
           <AssociationSet Name="FK_LayoutFields_Fields" Association="Self.FK_LayoutFields_Fields">
             <End Role="Fields" EntitySet="Fields" />
@@ -1030,8 +1030,8 @@
           <NavigationProperty Name="FieldValues_Decimal" Relationship="Self.FK_FieldValues_Decimal_FieldValues" FromRole="FieldValues" ToRole="FieldValues_Decimal" />
           <NavigationProperty Name="FieldValues_FK" Relationship="Self.FK_FieldValues_FK_FieldValues" FromRole="FieldValues" ToRole="FieldValues_FK" />
           <NavigationProperty Name="FieldValues_Int" Relationship="Self.FK_FieldValues_Int_FieldValues" FromRole="FieldValues" ToRole="FieldValues_Int" />
-          <NavigationProperty Name="FieldValues_LongText" Relationship="Self.FK_FieldValues_LongText_FieldValues" FromRole="FieldValues" ToRole="FieldValues_LongText" />
-          <NavigationProperty Name="FieldValues_ShortText" Relationship="Self.FK_FieldValues_ShortText_FieldValues" FromRole="FieldValues" ToRole="FieldValues_ShortText" />
+          <NavigationProperty Name="FieldValues_FreeText" Relationship="Aplomb.Models.FK_FieldValues_FreeText_FieldValues" FromRole="FieldValue" ToRole="FieldValues_FreeText" />
+          <NavigationProperty Name="FieldValues_Text" Relationship="Aplomb.Models.FK_FieldValues_Text_FieldValues" FromRole="FieldValue" ToRole="FieldValues_Text" />
         </EntityType>
         <EntityType Name="FieldValue_Bit">
           <Key>
@@ -1074,22 +1074,6 @@
           <Property Name="FieldValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Value" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FieldValue" Relationship="Self.FK_FieldValues_Int_FieldValues" FromRole="FieldValues_Int" ToRole="FieldValues" />
-        </EntityType>
-        <EntityType Name="FieldValue_LongText">
-          <Key>
-            <PropertyRef Name="FieldValueID" />
-          </Key>
-          <Property Name="FieldValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="FieldValue" Relationship="Self.FK_FieldValues_LongText_FieldValues" FromRole="FieldValues_LongText" ToRole="FieldValues" />
-        </EntityType>
-        <EntityType Name="FieldValue_ShortText">
-          <Key>
-            <PropertyRef Name="FieldValueID" />
-          </Key>
-          <Property Name="FieldValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Value" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="FieldValue" Relationship="Self.FK_FieldValues_ShortText_FieldValues" FromRole="FieldValues_ShortText" ToRole="FieldValues" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -1358,30 +1342,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FieldValues_LongText_FieldValues">
-          <End Role="FieldValues" Type="Self.FieldValue" Multiplicity="1" />
-          <End Role="FieldValues_LongText" Type="Aplomb.Models.FieldValue_LongText" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="FieldValues">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="FieldValues_LongText">
-              <PropertyRef Name="FieldValueID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FieldValues_ShortText_FieldValues">
-          <End Role="FieldValues" Type="Self.FieldValue" Multiplicity="1" />
-          <End Role="FieldValues_ShortText" Type="Aplomb.Models.FieldValue_ShortText" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="FieldValues">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="FieldValues_ShortText">
-              <PropertyRef Name="FieldValueID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RightEntityTypes_Permissions">
           <End Role="Permissions" Type="Self.Permission" Multiplicity="1" />
           <End Role="RightEntityTypes" Type="Self.RightEntityType" Multiplicity="*" />
@@ -1501,8 +1461,6 @@
           <EntitySet Name="FieldValue_Decimal" EntityType="Aplomb.Models.FieldValue_Decimal" />
           <EntitySet Name="FieldValue_FK" EntityType="Aplomb.Models.FieldValue_FK" />
           <EntitySet Name="FieldValue_Int" EntityType="Aplomb.Models.FieldValue_Int" />
-          <EntitySet Name="FieldValue_LongText" EntityType="Aplomb.Models.FieldValue_LongText" />
-          <EntitySet Name="FieldValue_ShortText" EntityType="Aplomb.Models.FieldValue_ShortText" />
           <EntitySet Name="Permissions" EntityType="Self.Permission" />
           <EntitySet Name="RightEntityTypes" EntityType="Self.RightEntityType" />
           <EntitySet Name="RightFields" EntityType="Self.RightField" />
@@ -1567,14 +1525,6 @@
           <AssociationSet Name="FK_FieldValues_Int_FieldValues" Association="Self.FK_FieldValues_Int_FieldValues">
             <End Role="FieldValues" EntitySet="FieldValues" />
             <End Role="FieldValues_Int" EntitySet="FieldValue_Int" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FieldValues_LongText_FieldValues" Association="Self.FK_FieldValues_LongText_FieldValues">
-            <End Role="FieldValues" EntitySet="FieldValues" />
-            <End Role="FieldValues_LongText" EntitySet="FieldValue_LongText" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FieldValues_ShortText_FieldValues" Association="Self.FK_FieldValues_ShortText_FieldValues">
-            <End Role="FieldValues" EntitySet="FieldValues" />
-            <End Role="FieldValues_ShortText" EntitySet="FieldValue_ShortText" />
           </AssociationSet>
           <AssociationSet Name="FK_RightEntityTypes_Permissions" Association="Self.FK_RightEntityTypes_Permissions">
             <End Role="Permissions" EntitySet="Permissions" />
@@ -1685,6 +1635,16 @@
           <AssociationSet Name="FK_DataDiagramEntityTypes_EntityTypes" Association="Aplomb.Models.FK_DataDiagramEntityTypes_EntityTypes">
             <End Role="EntityType" EntitySet="EntityTypes" />
             <End Role="DataDiagramEntityType" EntitySet="DataDiagramEntityTypes" />
+          </AssociationSet>
+          <EntitySet Name="FieldValues_FreeText" EntityType="Aplomb.Models.FieldValues_FreeText" />
+          <EntitySet Name="FieldValues_Text" EntityType="Aplomb.Models.FieldValues_Text" />
+          <AssociationSet Name="FK_FieldValues_FreeText_FieldValues" Association="Aplomb.Models.FK_FieldValues_FreeText_FieldValues">
+            <End Role="FieldValue" EntitySet="FieldValues" />
+            <End Role="FieldValues_FreeText" EntitySet="FieldValues_FreeText" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldValues_Text_FieldValues" Association="Aplomb.Models.FK_FieldValues_Text_FieldValues">
+            <End Role="FieldValue" EntitySet="FieldValues" />
+            <End Role="FieldValues_Text" EntitySet="FieldValues_Text" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="LayoutField">
@@ -1997,6 +1957,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FieldValues_FreeText">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FieldValue" Relationship="Aplomb.Models.FK_FieldValues_FreeText_FieldValues" FromRole="FieldValues_FreeText" ToRole="FieldValue" />
+        </EntityType>
+        <EntityType Name="FieldValues_Text">
+          <Key>
+            <PropertyRef Name="FieldValueID" />
+          </Key>
+          <Property Name="FieldValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FieldValue" Relationship="Aplomb.Models.FK_FieldValues_Text_FieldValues" FromRole="FieldValues_Text" ToRole="FieldValue" />
+        </EntityType>
+        <Association Name="FK_FieldValues_FreeText_FieldValues">
+          <End Type="Aplomb.Models.FieldValue" Role="FieldValue" Multiplicity="1" />
+          <End Type="Aplomb.Models.FieldValues_FreeText" Role="FieldValues_FreeText" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValue">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_FreeText">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldValues_Text_FieldValues">
+          <End Type="Aplomb.Models.FieldValue" Role="FieldValue" Multiplicity="1" />
+          <End Type="Aplomb.Models.FieldValues_Text" Role="FieldValues_Text" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FieldValue">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FieldValues_Text">
+              <PropertyRef Name="FieldValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2091,22 +2091,6 @@
           <EntitySetMapping Name="FieldValue_Int">
             <EntityTypeMapping TypeName="Aplomb.Models.FieldValue_Int">
               <MappingFragment StoreEntitySet="FieldValues_Int">
-                <ScalarProperty Name="FieldValueID" ColumnName="FieldValueID" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FieldValue_LongText">
-            <EntityTypeMapping TypeName="Aplomb.Models.FieldValue_LongText">
-              <MappingFragment StoreEntitySet="FieldValues_LongText">
-                <ScalarProperty Name="FieldValueID" ColumnName="FieldValueID" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FieldValue_ShortText">
-            <EntityTypeMapping TypeName="Aplomb.Models.FieldValue_ShortText">
-              <MappingFragment StoreEntitySet="FieldValues_ShortText">
                 <ScalarProperty Name="FieldValueID" ColumnName="FieldValueID" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
@@ -2295,6 +2279,22 @@
                 <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldValues_FreeText">
+            <EntityTypeMapping TypeName="Aplomb.Models.FieldValues_FreeText">
+              <MappingFragment StoreEntitySet="FieldValues_FreeText">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="FieldValueID" ColumnName="FieldValueID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldValues_Text">
+            <EntityTypeMapping TypeName="Aplomb.Models.FieldValues_Text">
+              <MappingFragment StoreEntitySet="FieldValues_Text">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="FieldValueID" ColumnName="FieldValueID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

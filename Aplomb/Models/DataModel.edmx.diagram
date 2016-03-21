@@ -15,8 +15,6 @@
         <EntityTypeShape EntityType="Aplomb.Models.FieldValue_Decimal" Width="1.75" PointX="11.375" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Aplomb.Models.FieldValue_FK" Width="1.5" PointX="8.125" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="Aplomb.Models.FieldValue_Int" Width="1.5" PointX="9.625" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Aplomb.Models.FieldValue_LongText" Width="1.875" PointX="17.375" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Aplomb.Models.FieldValue_ShortText" Width="1.875" PointX="15.25" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Aplomb.Models.Permission" Width="1.5" PointX="9.5" PointY="5.125" IsExpanded="true" FillColor="Chocolate" />
         <EntityTypeShape EntityType="Aplomb.Models.RightEntityType" Width="1.5" PointX="11.375" PointY="4" IsExpanded="true" FillColor="Chocolate" />
         <EntityTypeShape EntityType="Aplomb.Models.RightField" Width="1.5" PointX="13.25" PointY="4" IsExpanded="true" FillColor="Chocolate" />
@@ -42,8 +40,6 @@
         <AssociationConnector Association="Aplomb.Models.FK_FieldValues_Decimal_FieldValues" ManuallyRouted="false" />
         <AssociationConnector Association="Aplomb.Models.FK_FieldValues_FK_FieldValues" ManuallyRouted="false" />
         <AssociationConnector Association="Aplomb.Models.FK_FieldValues_Int_FieldValues" ManuallyRouted="false" />
-        <AssociationConnector Association="Aplomb.Models.FK_FieldValues_LongText_FieldValues" ManuallyRouted="false" />
-        <AssociationConnector Association="Aplomb.Models.FK_FieldValues_ShortText_FieldValues" ManuallyRouted="false" />
         <AssociationConnector Association="Aplomb.Models.FK_RightEntityTypes_Permissions" ManuallyRouted="false" />
         <AssociationConnector Association="Aplomb.Models.FK_RightFields_Permissions" ManuallyRouted="false" />
         <AssociationConnector Association="Aplomb.Models.FK_RightEntityTypes_Rights" ManuallyRouted="false" >
@@ -83,6 +79,10 @@
         <EntityTypeShape EntityType="Aplomb.Models.DataDiagram" Width="2" PointX="15.125" PointY="3.25" FillColor="Green" />
         <AssociationConnector Association="Aplomb.Models.FK_DataDiagramEntityTypes_DataDiagrams" />
         <AssociationConnector Association="Aplomb.Models.FK_DataDiagramEntityTypes_EntityTypes" />
+        <EntityTypeShape EntityType="Aplomb.Models.FieldValues_FreeText" Width="1.75" PointX="17.25" PointY="13.5" />
+        <EntityTypeShape EntityType="Aplomb.Models.FieldValues_Text" Width="1.75" PointX="15.25" PointY="13.5" />
+        <AssociationConnector Association="Aplomb.Models.FK_FieldValues_FreeText_FieldValues" />
+        <AssociationConnector Association="Aplomb.Models.FK_FieldValues_Text_FieldValues" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

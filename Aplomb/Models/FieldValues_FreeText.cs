@@ -12,7 +12,7 @@ namespace Aplomb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class FieldValue_LongText
+    public partial class FieldValues_FreeText
     {
         public int FieldValueID { get; set; }
         public string Value { get; set; }

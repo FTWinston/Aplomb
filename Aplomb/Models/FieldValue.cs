@@ -27,7 +27,7 @@ namespace Aplomb.Models
         public virtual FieldValue_Decimal FieldValues_Decimal { get; set; }
         public virtual FieldValue_FK FieldValues_FK { get; set; }
         public virtual FieldValue_Int FieldValues_Int { get; set; }
-        public virtual FieldValue_LongText FieldValues_LongText { get; set; }
-        public virtual FieldValue_ShortText FieldValues_ShortText { get; set; }
+        public virtual FieldValues_FreeText FieldValues_FreeText { get; set; }
+        public virtual FieldValues_Text FieldValues_Text { get; set; }
     }
 }

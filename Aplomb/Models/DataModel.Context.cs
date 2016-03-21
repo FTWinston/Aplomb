@@ -35,8 +35,6 @@ namespace Aplomb.Models
         public virtual DbSet<FieldValue_Decimal> FieldValue_Decimal { get; set; }
         public virtual DbSet<FieldValue_FK> FieldValue_FK { get; set; }
         public virtual DbSet<FieldValue_Int> FieldValue_Int { get; set; }
-        public virtual DbSet<FieldValue_LongText> FieldValue_LongText { get; set; }
-        public virtual DbSet<FieldValue_ShortText> FieldValue_ShortText { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<RightEntityType> RightEntityTypes { get; set; }
         public virtual DbSet<RightField> RightFields { get; set; }
@@ -56,5 +54,7 @@ namespace Aplomb.Models
         public virtual DbSet<Section> Sections { get; set; }
         public virtual DbSet<DataDiagramEntityType> DataDiagramEntityTypes { get; set; }
         public virtual DbSet<DataDiagram> DataDiagrams { get; set; }
+        public virtual DbSet<FieldValues_FreeText> FieldValues_FreeText { get; set; }
+        public virtual DbSet<FieldValues_Text> FieldValues_Text { get; set; }
     }
 }
