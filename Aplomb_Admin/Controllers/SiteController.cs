@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Aplomb.Areas.Admin.Controllers
+namespace Aplomb.Admin.Controllers
 {
-    public class SecurityController : Controller
+    public class SiteController : Controller
     {
         //
-        // GET: /Admin/Security/
+        // GET: /Admin/Site/
         public ActionResult Index()
         {
             return View();

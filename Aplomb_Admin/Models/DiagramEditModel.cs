@@ -1,12 +1,11 @@
 ﻿using Aplomb.Common.Models;
-using Aplomb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Aplomb.Areas.Admin.Models
+namespace Aplomb.Admin.Models
 {
     public class DiagramEditModel
     {

@@ -26,6 +26,12 @@ namespace Aplomb.Admin
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/admin").IncludeDirectory(
+                        "~/Scripts/Admin", "*.js"));
+
+            bundles.Add(new StyleBundle("~/Content/admin").IncludeDirectory(
+                      "~/Content/Admin", "*.css"));
         }
     }
 }

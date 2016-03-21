@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Aplomb.Areas.Admin.Models
+namespace Aplomb.Admin.Models
 {
     public class DiagramEntityModel
     {

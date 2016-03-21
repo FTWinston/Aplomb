@@ -173,13 +173,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\ModelController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SecurityController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SiteController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
-    <Compile Include="Areas\Admin\Models\DiagramEditModel.cs" />
-    <Compile Include="Areas\Admin\Models\DiagramEntityModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -193,7 +186,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Admin\diagrams.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -202,14 +194,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\Admin\diagrams.js" />
-    <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Model\DeleteDiagram.cshtml" />
-    <Content Include="Areas\Admin\Views\Model\Diagram.cshtml" />
-    <Content Include="Areas\Admin\Views\Model\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Model\Type.cshtml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.2.1.js" />
@@ -262,9 +246,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\Security\" />
-    <Folder Include="Areas\Admin\Views\Site\" />
-    <Folder Include="Areas\Admin\Views\Users\" />
     <Folder Include="Views\Menu\" />
   </ItemGroup>
   <ItemGroup>
