@@ -9,22 +9,22 @@ using System.Web.Mvc;
 using Aplomb.Admin.Models;
 using System.Web.Script.Serialization;
 using Aplomb.Common.Models;
+using Aplomb.Admin.Areas.Data.Models;
 
-namespace Aplomb.Admin.Controllers
+namespace Aplomb.Admin.Areas.Data.Controllers
 {
-    public class ModelController : Controller
+    public class DiagramsController : Controller
     {
         private DataModel db = new DataModel();
 
-        #region diagrams
-        // GET: /Admin/Model/
+        // GET: /Data/Diagrams/
         public ActionResult Index()
         {
-            return View(db.DataDiagrams.OrderBy(d => d.SortOrder).ToList());
+            return View("List", db.DataDiagrams.OrderBy(d => d.SortOrder).ToList());
         }
 
-        // GET: /Admin/Model/Diagram/5
-        public ActionResult Diagram(int? id)
+        // GET: /Data/Diagrams/View/5
+        public ActionResult View(int? id)
         {
             if (id == null)
             {
@@ -37,22 +37,22 @@ namespace Aplomb.Admin.Controllers
             }
 
             var model = DiagramEditModel.Create(db, diagram, false);
-            return View("Diagram", model);
+            return View(model);
         }
 
-        // GET: /Admin/Model/CreateDiagram
-        public ActionResult CreateDiagram()
+        // GET: /Data/Diagrams/Create
+        public ActionResult Create()
         {
             var model = DiagramEditModel.Create(db, null, true);
-            return View("Diagram", model);
+            return View("View", model);
         }
 
-        // POST: /Admin/Model/CreateDiagram
+        // POST: /Data/Diagrams/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateDiagram([Bind(Include = "Name")] DataDiagram diagram, string layout)
+        public ActionResult Create([Bind(Include = "Name")] DataDiagram diagram, string layout)
         {
             if (ModelState.IsValid)
             {
@@ -69,15 +69,15 @@ namespace Aplomb.Admin.Controllers
             }
 
             var model = DiagramEditModel.Create(db, diagram, true);
-            return View("Diagram", model);
+            return View("View", model);
         }
 
-        // POST: /Admin/Model/EditDiagram/5
+        // POST: /Data/Diagrams/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditDiagram([Bind(Include="ID,Name,SortOrder")] DataDiagram diagram, string layout)
+        public ActionResult Edit([Bind(Include="ID,Name,SortOrder")] DataDiagram diagram, string layout)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace Aplomb.Admin.Controllers
             }
 
             var model = DiagramEditModel.Create(db, diagram, false);
-            return View("Diagram", model);
+            return View("View", model);
         }
 
         private void SaveDiagramEntities(DataDiagram diagram, string layoutJson, bool hasExisting)
@@ -140,7 +140,7 @@ namespace Aplomb.Admin.Controllers
             }
         }
 
-        // GET: /Admin/Model/DeleteDiagram/5
+        // GET: /Data/Diagrams/Delete/5
         public ActionResult DeleteDiagram(int? id)
         {
             if (id == null)
@@ -155,8 +155,8 @@ namespace Aplomb.Admin.Controllers
             return View(datadiagram);
         }
 
-        // POST: /Admin/Model/DeleteDiagram/5
-        [HttpPost, ActionName("DeleteDiagram")]
+        // POST: /Data/Diagrams/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteDiagramConfirmed(int id)
         {
@@ -165,20 +165,7 @@ namespace Aplomb.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        #endregion
-
-        #region types
-        // POST: /Admin/Model/Type
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Type(int typeID, int diagramID)
-        {
-            return View("Type");
-        }
-        #endregion types
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

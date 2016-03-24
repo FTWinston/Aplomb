@@ -3,29 +3,28 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+    <h1>Aplomb admin site</h1>
+    <p class="lead">Aplomb is a free web platform, designed from the ground up for flexibility and security.</p>
+    <p>This admin site will allow you to configure and control your website with ease. Please contact us if you require any help or assistance.</p>
+    <p>@Html.ActionLink("Contact us »", "Contact", "Home", null, new { @class = "btn btn-primary btn-large" })</p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Data model</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            Control the data types your website will store, and configure the relationships between them.
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p>@Html.ActionLink("Edit »", "Index", "Data", null, new { @class = "btn btn-default" })</p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Site pages</h2>
+        <p>Manage the pages of your website, control the information they display, and configure the menus that allow users to navigate them.</p>
+        <p>@Html.ActionLink("Edit »", "Index", "Site", null, new { @class = "btn btn-default" })</p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Users &amp; security</h2>
+        <p>Manage the user accounts and security groups of your website.</p>
+        <p>@Html.ActionLink("Edit »", "Index", "Security", null, new { @class = "btn btn-default" })</p>
     </div>
 </div>

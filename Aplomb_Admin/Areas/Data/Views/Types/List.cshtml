@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Aplomb.Common.Models.EntityType>
+
+@{
+    ViewBag.Title = "Data Types";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>Used in diagrams</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name, "View", new { id = item.ID })
+        </td>
+        <td>
+            @string.Join(", ", item.DataDiagramEntityTypes.Select(de => de.DataDiagram.Name).OrderBy(n => n))
+        </td>
+        <td>
+            @Html.ActionLink("View", "View", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

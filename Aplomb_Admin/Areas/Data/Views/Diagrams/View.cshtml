@@ -1,4 +1,4 @@
-﻿@model Aplomb.Admin.Models.DiagramEditModel
+﻿@model Aplomb.Admin.Areas.Data.Models.DiagramEditModel
 
 @{
     ViewBag.Title = "Edit Diagram";
@@ -6,7 +6,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm(Model.IsNew ? "CreateDiagram" : "EditDiagram", "Model"))
+@using (Html.BeginForm(Model.IsNew ? "Create" : "Edit", "Model"))
 {
     @Html.AntiForgeryToken()
     
@@ -58,9 +58,6 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/admin")
-    @Styles.Render("~/content/admin")
-
     <script type="text/javascript">
     @if (Model.Diagram != null)
     {

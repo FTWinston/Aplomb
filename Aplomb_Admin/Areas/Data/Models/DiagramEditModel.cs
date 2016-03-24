@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Aplomb.Admin.Models
+namespace Aplomb.Admin.Areas.Data.Models
 {
     public class DiagramEditModel
     {
