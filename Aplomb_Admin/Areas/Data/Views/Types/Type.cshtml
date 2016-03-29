@@ -1,0 +1,73 @@
+﻿@model Aplomb.Admin.Areas.Data.Models.TypeEditModel
+
+@{
+    ViewBag.Title = "Edit " + (Model.Type == null ? "new" : Model.Type.Name) + " entity type";
+    var rowNum = 0;
+
+    var nameProps = new Dictionary<string, object>();
+    nameProps["class"] = "form-control";
+    nameProps["placeholder"] = Model.TypeNameLabel;
+    nameProps["aria-label"] = Model.TypeNameDescription;
+
+    if (Model.ReadOnly)
+    {
+        nameProps["readonly"] = "readonly";
+    }
+}
+
+@using (Html.BeginForm("Save", "Types", FormMethod.Post))
+{
+    <div class="input-group input-group-lg">
+        @Html.TextBox("typeName", Model.Type == null ? string.Empty : Model.Type.Name, nameProps)
+    </div>
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    if (Model.Type != null && !Model.ReadOnly)
+    {
+        @Html.Hidden("typeID", Model.Type.ID);
+    }
+    <hr />
+    <ul id="fieldList">
+        @if (Model.Type != null)
+        {
+            foreach (var field in Model.Type.Fields.OrderBy(f => f.SortOrder))
+            {
+                @Html.Partial("Field", new Aplomb.Admin.Areas.Data.Models.FieldEditModel(Model.ReadOnly, rowNum++.ToString(), field, Model.FieldTypes))
+            }
+        }
+    </ul>
+
+    if (!Model.ReadOnly)
+    {
+        <div class="form-group">
+            <a href="#" onclick="addFieldRow(); return false;" class="btn btn-default">@Model.AddFieldLabel</a>
+            <input type="submit" value="save changes" class="btn btn-primary" />
+        </div>
+    }
+}
+
+
+@if (!Model.ReadOnly)
+{
+    using (Ajax.BeginForm("AddField", "Types", new AjaxOptions {
+        UpdateTargetId = "fieldList",
+        InsertionMode = InsertionMode.InsertAfter,
+        HttpMethod = "POST"
+    }, new { id = "addFieldForm" }))
+    {
+        @Html.Hidden("fieldRowNum", rowNum);
+    }
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+    <script type="text/javascript">
+        function addFieldRow() {
+            $('#addFieldForm').submit();
+
+            var rowNum = parseInt($('#fieldRowNum').val());
+            $('#fieldRowNum').val(rowNum + 1);
+        }
+    </script>
+}

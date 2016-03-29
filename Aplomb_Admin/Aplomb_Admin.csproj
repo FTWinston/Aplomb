@@ -175,6 +175,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Data\DataAreaRegistration.cs" />
+    <Compile Include="Areas\Data\Models\FieldEditModel.cs" />
+    <Compile Include="Areas\Data\Models\TypeEditModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Data\Controllers\TypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -219,7 +221,10 @@
     <Content Include="Areas\Data\Views\web.config" />
     <Content Include="Areas\Data\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Data\Views\Types\List.cshtml" />
+    <Content Include="Areas\Data\Views\Types\Field.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -256,7 +261,7 @@
     <Content Include="Areas\Data\Views\Diagrams\Delete.cshtml" />
     <Content Include="Areas\Data\Views\Diagrams\View.cshtml" />
     <Content Include="Areas\Data\Views\Diagrams\List.cshtml" />
-    <Content Include="Areas\Data\Views\Types\View.cshtml" />
+    <Content Include="Areas\Data\Views\Types\Type.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

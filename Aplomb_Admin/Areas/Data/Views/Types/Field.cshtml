@@ -1,0 +1,25 @@
+﻿@model Aplomb.Admin.Areas.Data.Models.FieldEditModel
+
+<li>
+    @if (Model.Field != null)
+    {
+        Html.Hidden("fieldid_" + Model.RowID, Model.Field.ID);
+    }
+
+    @{
+        var nameProps = new Dictionary<string, object>();
+        var typeProps = new Dictionary<string, object>();
+
+        nameProps["placeholder"] = Model.FieldNameLabel;
+        
+        if (Model.ReadOnly)
+        {
+            nameProps["readonly"] = "readonly";
+            typeProps["readonly"] = "readonly";
+        }
+    }
+    @Html.TextBox("name_" + Model.RowID, Model.Field == null ? string.Empty : Model.Field.Name, nameProps)
+    
+    @Html.Label("type_" + Model.RowID, Model.FieldTypeLabel)
+    @Html.DropDownList("type_" + Model.RowID, Model.FieldTypeItems, Model.Field == null ? "(select)" : null, typeProps)
+</li>
