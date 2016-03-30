@@ -1,6 +1,7 @@
 ﻿@model Aplomb.Admin.Areas.Data.Models.FieldEditModel
 
-<li>
+<li class="list-group-item">
+    <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
     @if (Model.Field != null)
     {
         Html.Hidden("fieldid_" + Model.RowID, Model.Field.ID);

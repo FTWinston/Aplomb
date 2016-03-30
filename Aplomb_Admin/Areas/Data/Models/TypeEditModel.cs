@@ -20,7 +20,7 @@ namespace Aplomb.Admin.Areas.Data.Models
         public EntityType Type { get; private set; }
         public IEnumerable<FieldType> FieldTypes { get; private set; }
 
-        public string TypeNameLabel { get { return "Type name"; } }
+        public string TypeNameLabel { get { return "Entity type name"; } }
         public string TypeNameDescription { get { return "Name of this entity type"; } }
         public string AddFieldLabel { get { return "add field"; } }
         public string AddFieldTooltip { get { return "Add a new, blank field to this entity type"; } }

@@ -27,7 +27,7 @@
         @Html.Hidden("typeID", Model.Type.ID);
     }
     <hr />
-    <ul id="fieldList">
+    <ul id="fieldList" class="list-group">
         @if (Model.Type != null)
         {
             foreach (var field in Model.Type.Fields.OrderBy(f => f.SortOrder))
@@ -60,8 +60,6 @@
 }
 
 @section scripts{
-    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
-
     <script type="text/javascript">
         function addFieldRow() {
             $('#addFieldForm').submit();
@@ -69,5 +67,10 @@
             var rowNum = parseInt($('#fieldRowNum').val());
             $('#fieldRowNum').val(rowNum + 1);
         }
+
+        Sortable.create(document.getElementById('fieldList'), {
+            handle: '.glyphicon-sort',
+            animation: 150
+        });
     </script>
 }
