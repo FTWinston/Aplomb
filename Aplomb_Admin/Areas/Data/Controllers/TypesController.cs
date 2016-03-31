@@ -89,6 +89,7 @@ namespace Aplomb.Admin.Areas.Data.Controllers
 
                 var strTypeID = data["type_" + rowNum];
                 var strFieldID = data["fieldid_" + rowNum];
+                var strSortOrder = data["sortorder_" + rowNum];
 
                 Field field;
 
@@ -107,7 +108,7 @@ namespace Aplomb.Admin.Areas.Data.Controllers
 
                 field.Name = name.Trim();
                 field.TypeID = int.Parse(strTypeID);
-                field.SortOrder = rowNum;
+                field.SortOrder = int.Parse(strSortOrder);
                 rowNum++;
             }
 

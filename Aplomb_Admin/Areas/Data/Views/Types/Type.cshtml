@@ -61,7 +61,8 @@
         {
             UpdateTargetId = "fieldList",
             InsertionMode = InsertionMode.InsertAfter,
-            HttpMethod = "POST"
+            HttpMethod = "POST",
+            OnSuccess = "updateSortOrder"
         }, new { id = "addFieldForm" }))
         {
             @Html.Hidden("fieldRowNum", rowNum);
@@ -93,9 +94,16 @@
                 $('#nameChangeForm').submit();
             }
 
+            function updateSortOrder() {
+                $('#fieldList input.fieldSortOrder').each(function (index) {
+                    $(this).val(index + 1);
+                })
+            }
+
             Sortable.create(document.getElementById('fieldList'), {
                 handle: '.glyphicon-sort',
-                animation: 150
+                animation: 150,
+                onSort: updateSortOrder
             });
         </script>
     }

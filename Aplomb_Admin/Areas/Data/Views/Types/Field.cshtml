@@ -4,9 +4,9 @@
     <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
     @if (Model.Field != null)
     {
-        Html.Hidden("fieldid_" + Model.RowID, Model.Field.ID);
+        @Html.Hidden("fieldid_" + Model.RowID, Model.Field.ID)
     }
-
+    @Html.Hidden("sortorder_" + Model.RowID, Model.Field == null ? 0 : Model.Field.SortOrder, new { @class = "fieldSortOrder" })
     @{
         var nameProps = new Dictionary<string, object>();
         var typeProps = new Dictionary<string, object>();
