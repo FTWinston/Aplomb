@@ -222,6 +222,7 @@
     <Content Include="Areas\Data\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Data\Views\Types\List.cshtml" />
     <Content Include="Areas\Data\Views\Types\Field.cshtml" />
+    <Content Include="Areas\Data\Views\Types\NameUnique.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />

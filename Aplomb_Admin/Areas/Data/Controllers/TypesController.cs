@@ -41,6 +41,19 @@ namespace Aplomb.Admin.Areas.Data.Controllers
             return PartialView("Field", model);
         }
 
+        // POST: /Data/Types/CheckName
+        [HttpPost]
+        public ActionResult CheckName(int existingTypeID, string checkTypeName)
+        {
+            bool? isUnique;
+
+            if (string.IsNullOrWhiteSpace(checkTypeName))
+                isUnique = null;
+            else
+                isUnique = db.EntityTypes.SingleOrDefault(t => t.Name == checkTypeName && t.ID != existingTypeID) == null;
+            return PartialView("NameUnique", isUnique);
+        }
+
         private IEnumerable<FieldType> GetFieldTypes()
         {
             return db.FieldTypes.OrderBy(t => t.SortOrder).ThenBy(t => t.Name);

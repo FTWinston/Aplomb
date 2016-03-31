@@ -1,0 +1,31 @@
+﻿@model bool?
+
+@{ 
+    string classes = "input-group-addon";
+    string content, glyph;
+
+    if (!Model.HasValue)
+    {
+        glyph = null;
+        content = "enter a unique name";
+    }
+    else if (Model.Value)
+    {
+        glyph = "glyphicon-ok";
+        content = @"  name is unique";
+        classes += " alert alert-success";
+    }
+    else
+    {
+        glyph = "glyphicon-remove";
+        content = @"  name already in use";
+        classes += " alert alert-danger";
+    }
+}
+
+<span class="@classes" id="nameUnique">@content
+@if (glyph != null)
+{
+    <span class="glyphicon @glyph" aria-hidden="true"></span>
+}
+</span>

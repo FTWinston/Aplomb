@@ -13,64 +13,89 @@
     {
         nameProps["readonly"] = "readonly";
     }
+    else
+    {
+        nameProps["onchange"] = "nameChanged();";
+    }
 }
 
 @using (Html.BeginForm("Save", "Types", FormMethod.Post))
 {
-    <div class="input-group input-group-lg">
-        @Html.TextBox("typeName", Model.Type == null ? string.Empty : Model.Type.Name, nameProps)
-    </div>
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
-    if (Model.Type != null && !Model.ReadOnly)
-    {
-        @Html.Hidden("typeID", Model.Type.ID);
-    }
-    <hr />
-    <ul id="fieldList" class="list-group">
-        @if (Model.Type != null)
-        {
-            foreach (var field in Model.Type.Fields.OrderBy(f => f.SortOrder))
-            {
-                @Html.Partial("Field", new Aplomb.Admin.Areas.Data.Models.FieldEditModel(Model.ReadOnly, rowNum++.ToString(), field, Model.FieldTypes))
-            }
-        }
-    </ul>
 
+    <div class="form-group">
+        <div class="input-group input-group-lg">
+            @Html.TextBox("typeName", Model.Type == null ? string.Empty : Model.Type.Name, nameProps)
+            @Html.Partial("NameUnique", Model.Type == null ? new Nullable<Boolean>() : true)
+        </div>
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        @if (Model.Type != null && !Model.ReadOnly)
+        {
+            @Html.Hidden("typeID", Model.Type.ID);
+        }
+    </div>
+    <div class="form-group">
+        <ul id="fieldList" class="list-group">
+            @if (Model.Type != null)
+            {
+                foreach (var field in Model.Type.Fields.OrderBy(f => f.SortOrder))
+                {
+                    @Html.Partial("Field", new Aplomb.Admin.Areas.Data.Models.FieldEditModel(Model.ReadOnly, rowNum++.ToString(), field, Model.FieldTypes))
+                }
+            }
+        </ul>
+    </div>
     if (!Model.ReadOnly)
     {
-        <div class="form-group">
-            <a href="#" onclick="addFieldRow(); return false;" class="btn btn-default">@Model.AddFieldLabel</a>
-            <input type="submit" value="save changes" class="btn btn-primary" />
-        </div>
+    <div class="form-group">
+        <button onclick="addFieldRow(); return false;" class="btn btn-default">@Model.AddFieldLabel</button>
+        <input type="submit" value="save changes" class="btn btn-primary" />
+    </div>
     }
-}
+    }
 
 
-@if (!Model.ReadOnly)
-{
-    using (Ajax.BeginForm("AddField", "Types", new AjaxOptions {
-        UpdateTargetId = "fieldList",
-        InsertionMode = InsertionMode.InsertAfter,
-        HttpMethod = "POST"
-    }, new { id = "addFieldForm" }))
+    @if (!Model.ReadOnly)
     {
-        @Html.Hidden("fieldRowNum", rowNum);
-    }
-}
-
-@section scripts{
-    <script type="text/javascript">
-        function addFieldRow() {
-            $('#addFieldForm').submit();
-
-            var rowNum = parseInt($('#fieldRowNum').val());
-            $('#fieldRowNum').val(rowNum + 1);
+        using (Ajax.BeginForm("AddField", null, new AjaxOptions
+        {
+            UpdateTargetId = "fieldList",
+            InsertionMode = InsertionMode.InsertAfter,
+            HttpMethod = "POST"
+        }, new { id = "addFieldForm" }))
+        {
+            @Html.Hidden("fieldRowNum", rowNum);
         }
 
-        Sortable.create(document.getElementById('fieldList'), {
-            handle: '.glyphicon-sort',
-            animation: 150
-        });
-    </script>
-}
+        using (Ajax.BeginForm("CheckName", null, new AjaxOptions
+        {
+            UpdateTargetId = "nameUnique",
+            InsertionMode = InsertionMode.ReplaceWith,
+            HttpMethod = "POST"
+        }, new { id = "nameChangeForm" }))
+        {
+            @Html.Hidden("existingTypeID", Model.Type == null ? -1 : Model.Type.ID);
+            @Html.Hidden("checkTypeName", "");
+        }
+    }
+
+    @section scripts{
+        <script type="text/javascript">
+            function addFieldRow() {
+                $('#addFieldForm').submit();
+
+                var rowNum = parseInt($('#fieldRowNum').val());
+                $('#fieldRowNum').val(rowNum + 1);
+            }
+
+            function nameChanged() {
+                $('#checkTypeName').val($('#typeName').val());
+                $('#nameChangeForm').submit();
+            }
+
+            Sortable.create(document.getElementById('fieldList'), {
+                handle: '.glyphicon-sort',
+                animation: 150
+            });
+        </script>
+    }
