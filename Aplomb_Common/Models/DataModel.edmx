@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Aplomb.Common.Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Aplomb.Common.Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="UserEntities">
           <Key>
             <PropertyRef Name="ID" />
@@ -36,6 +36,8 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="DeletedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="FieldValues">
           <Key>
@@ -46,6 +48,8 @@
           <Property Name="FieldID" Type="int" Nullable="false" />
           <Property Name="FieldNumber" Type="int" Nullable="false" />
           <Property Name="ValueNumber" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="FieldValues_Bit">
           <Key>
@@ -761,7 +765,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AplombModelsStoreContainer">
+        <EntityContainer Name="AplombCommonModelsStoreContainer">
           <EntitySet Name="UserEntities" EntityType="Self.UserEntities" Schema="accounts" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="accounts" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="accounts" store:Type="Tables" />
@@ -970,8 +974,10 @@
           <Property Name="TypeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EntityType" Relationship="Self.FK_Entities_EntityTypes" FromRole="Entities" ToRole="EntityTypes" />
           <NavigationProperty Name="FieldValues" Relationship="Self.FK_FieldValues_Entities" FromRole="Entities" ToRole="FieldValues" />
-          <NavigationProperty Name="FieldValues_FK" Relationship="Self.FK_FieldValues_FK_Entities" FromRole="Entities" ToRole="FieldValues_FK" />
+          <NavigationProperty Name="FieldValues_FKs" Relationship="Self.FK_FieldValues_FK_Entities" FromRole="Entities" ToRole="FieldValues_FK" />
           <NavigationProperty Name="UserEntities" Relationship="Self.FK_UserEntities_Entities" FromRole="Entities" ToRole="UserEntities" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletedOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="EntityType">
           <Key>
@@ -1032,6 +1038,8 @@
           <NavigationProperty Name="FieldValues_Int" Relationship="Self.FK_FieldValues_Int_FieldValues" FromRole="FieldValues" ToRole="FieldValues_Int" />
           <NavigationProperty Name="FieldValues_FreeText" Relationship="Aplomb.Common.Models.FK_FieldValues_FreeText_FieldValues" FromRole="FieldValue" ToRole="FieldValues_FreeText" />
           <NavigationProperty Name="FieldValues_Text" Relationship="Aplomb.Common.Models.FK_FieldValues_Text_FieldValues" FromRole="FieldValue" ToRole="FieldValues_Text" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="FieldValue_Bit">
           <Key>
@@ -2002,10 +2010,12 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AplombModelsStoreContainer" CdmEntityContainer="DataModel">
+        <EntityContainerMapping StorageEntityContainer="AplombCommonModelsStoreContainer" CdmEntityContainer="DataModel">
           <EntitySetMapping Name="Entities">
             <EntityTypeMapping TypeName="Aplomb.Common.Models.Entity">
               <MappingFragment StoreEntitySet="Entities">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="DeletedOn" ColumnName="DeletedOn" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
               </MappingFragment>
@@ -2047,6 +2057,8 @@
           <EntitySetMapping Name="FieldValues">
             <EntityTypeMapping TypeName="Aplomb.Common.Models.FieldValue">
               <MappingFragment StoreEntitySet="FieldValues">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EntityID" ColumnName="EntityID" />
                 <ScalarProperty Name="FieldID" ColumnName="FieldID" />

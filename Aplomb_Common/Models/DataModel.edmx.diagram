@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f272ec7c18674d9bab04f890ac6a1d6b" Name="Diagram1" ZoomLevel="78">
+      <Diagram DiagramId="f272ec7c18674d9bab04f890ac6a1d6b" Name="Diagram1" ZoomLevel="76">
         <EntityTypeShape EntityType="Aplomb.Common.Models.Entity" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" FillColor="0, 122, 204" />
         <EntityTypeShape EntityType="Aplomb.Common.Models.EntityType" Width="1.5" PointX="11.375" PointY="8.375" IsExpanded="true" FillColor="Green" />
         <EntityTypeShape EntityType="Aplomb.Common.Models.Field" Width="1.5" PointX="13.25" PointY="8.375" IsExpanded="true" FillColor="Green" />
         <EntityTypeShape EntityType="Aplomb.Common.Models.FieldType" Width="1.5" PointX="15.125" PointY="8.375" IsExpanded="true" FillColor="Green" />
-        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue" Width="1.75" PointX="5.625" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue_Bit" Width="1.5" PointX="7.875" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue_Date" Width="1.625" PointX="13.375" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue_Decimal" Width="1.75" PointX="11.375" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue" Width="1.75" PointX="5.625" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue_Bit" Width="1.5" PointX="7.875" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue_Date" Width="1.625" PointX="13.375" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue_Decimal" Width="1.75" PointX="11.375" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue_FK" Width="1.5" PointX="8.125" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue_Int" Width="1.5" PointX="9.625" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue_Int" Width="1.5" PointX="9.625" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Aplomb.Common.Models.Permission" Width="1.5" PointX="9.5" PointY="5.125" IsExpanded="true" FillColor="Chocolate" />
         <EntityTypeShape EntityType="Aplomb.Common.Models.RightEntityType" Width="1.5" PointX="11.375" PointY="4" IsExpanded="true" FillColor="Chocolate" />
         <EntityTypeShape EntityType="Aplomb.Common.Models.RightField" Width="1.5" PointX="13.25" PointY="4" IsExpanded="true" FillColor="Chocolate" />
@@ -79,8 +79,8 @@
         <EntityTypeShape EntityType="Aplomb.Common.Models.DataDiagram" Width="2" PointX="15.125" PointY="3.25" FillColor="Green" />
         <AssociationConnector Association="Aplomb.Common.Models.FK_DataDiagramEntityTypes_DataDiagrams" />
         <AssociationConnector Association="Aplomb.Common.Models.FK_DataDiagramEntityTypes_EntityTypes" />
-        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValues_FreeText" Width="1.75" PointX="17.25" PointY="13.5" />
-        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValues_Text" Width="1.75" PointX="15.25" PointY="13.5" />
+        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValues_FreeText" Width="1.75" PointX="17.25" PointY="14.125" />
+        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValues_Text" Width="1.75" PointX="15.25" PointY="14.125" />
         <AssociationConnector Association="Aplomb.Common.Models.FK_FieldValues_FreeText_FieldValues" />
         <AssociationConnector Association="Aplomb.Common.Models.FK_FieldValues_Text_FieldValues" />
       </Diagram>

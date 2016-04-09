@@ -17,16 +17,18 @@ namespace Aplomb.Common.Models
         public Entity()
         {
             this.FieldValues = new HashSet<FieldValue>();
-            this.FieldValues_FK = new HashSet<FieldValue_FK>();
+            this.FieldValues_FKs = new HashSet<FieldValue_FK>();
             this.UserEntities = new HashSet<UserEntity>();
         }
     
         public int ID { get; set; }
         public int TypeID { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public Nullable<System.DateTime> DeletedOn { get; set; }
     
         public virtual EntityType EntityType { get; set; }
         public virtual ICollection<FieldValue> FieldValues { get; set; }
-        public virtual ICollection<FieldValue_FK> FieldValues_FK { get; set; }
+        public virtual ICollection<FieldValue_FK> FieldValues_FKs { get; set; }
         public virtual ICollection<UserEntity> UserEntities { get; set; }
     }
 }
