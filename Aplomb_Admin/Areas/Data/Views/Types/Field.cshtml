@@ -23,4 +23,6 @@
     
     @Html.Label("type_" + Model.RowID, Model.FieldTypeLabel)
     @Html.DropDownList("type_" + Model.RowID, Model.FieldTypeItems, Model.Field == null ? "(select)" : null, typeProps)
+
+    <input type="button" class="btn btn-default remove" value="remove field" onclick="removeRow(this);" />
 </li>

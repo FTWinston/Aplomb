@@ -34,10 +34,10 @@ namespace Aplomb.Admin.Areas.Data.Controllers
 
         // POST: /Data/Types/AddField
         [HttpPost]
-        public ActionResult AddField(int fieldRowNum)
+        public ActionResult AddField(int nextRowNum)
         {
             var types = GetFieldTypes();
-            var model = new FieldEditModel(false, fieldRowNum.ToString(), null, types);
+            var model = new FieldEditModel(false, nextRowNum.ToString(), null, types);
             return PartialView("Field", model);
         }
 
@@ -80,19 +80,15 @@ namespace Aplomb.Admin.Areas.Data.Controllers
 
             type.Name = data["typeName"].Trim();
 
-            var rowNum = 0;
-            while (true)
+            var rowIDs = data["rowIDs"].Split(',');
+            foreach (var row in rowIDs)
             {
-                var name = data["name_" + rowNum];
-                if (name == null)
-                    break; // if fields are removed, we'll need to be able to skip over them... perhaps the form could have a list of field identifiers, and we loop over those?
-
+                int rowNum = int.Parse(row);
                 var strTypeID = data["type_" + rowNum];
                 var strFieldID = data["fieldid_" + rowNum];
                 var strSortOrder = data["sortorder_" + rowNum];
 
                 Field field;
-
                 if (strFieldID == null)
                 {
                     field = new Field();
@@ -106,10 +102,9 @@ namespace Aplomb.Admin.Areas.Data.Controllers
                     remainingFields.Remove(field);
                 }
 
-                field.Name = name.Trim();
+                field.Name = data["name_" + rowNum].Trim();
                 field.TypeID = int.Parse(strTypeID);
                 field.SortOrder = int.Parse(strSortOrder);
-                rowNum++;
             }
 
             foreach (var toRemove in remainingFields)

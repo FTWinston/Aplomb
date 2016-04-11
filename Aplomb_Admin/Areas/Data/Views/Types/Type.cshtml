@@ -49,61 +49,72 @@
     {
     <div class="form-group">
         <button onclick="addFieldRow(); return false;" class="btn btn-default">@Model.AddFieldLabel</button>
-        <input type="submit" value="save changes" class="btn btn-primary" />
+        <input onclick="processFieldRows();" type="submit" value="save changes" class="btn btn-primary" />
+        @Html.Hidden("rowIDs")
     </div>
     }
-    }
+}
 
-
-    @if (!Model.ReadOnly)
+@if (!Model.ReadOnly)
+{
+    using (Ajax.BeginForm("AddField", null, new AjaxOptions
     {
-        using (Ajax.BeginForm("AddField", null, new AjaxOptions
-        {
-            UpdateTargetId = "fieldList",
-            InsertionMode = InsertionMode.InsertAfter,
-            HttpMethod = "POST",
-            OnSuccess = "updateSortOrder"
-        }, new { id = "addFieldForm" }))
-        {
-            @Html.Hidden("fieldRowNum", rowNum);
-        }
-
-        using (Ajax.BeginForm("CheckName", null, new AjaxOptions
-        {
-            UpdateTargetId = "nameUnique",
-            InsertionMode = InsertionMode.ReplaceWith,
-            HttpMethod = "POST"
-        }, new { id = "nameChangeForm" }))
-        {
-            @Html.Hidden("existingTypeID", Model.Type == null ? -1 : Model.Type.ID);
-            @Html.Hidden("checkTypeName", "");
-        }
+        UpdateTargetId = "fieldList",
+        InsertionMode = InsertionMode.InsertAfter,
+        HttpMethod = "POST"
+    }, new { id = "addFieldForm" }))
+    {
+        @Html.Hidden("nextRowNum", rowNum);
     }
 
-    @section scripts{
-        <script type="text/javascript">
-            function addFieldRow() {
-                $('#addFieldForm').submit();
+    using (Ajax.BeginForm("CheckName", null, new AjaxOptions
+    {
+        UpdateTargetId = "nameUnique",
+        InsertionMode = InsertionMode.ReplaceWith,
+        HttpMethod = "POST"
+    }, new { id = "nameChangeForm" }))
+    {
+        @Html.Hidden("existingTypeID", Model.Type == null ? -1 : Model.Type.ID);
+        @Html.Hidden("checkTypeName", "");
+    }
+}
 
-                var rowNum = parseInt($('#fieldRowNum').val());
-                $('#fieldRowNum').val(rowNum + 1);
-            }
+@section scripts{
+    <script type="text/javascript">
+        function addFieldRow() {
+            $('#addFieldForm').submit();
 
-            function nameChanged() {
-                $('#checkTypeName').val($('#typeName').val());
-                $('#nameChangeForm').submit();
-            }
+            var rowNum = parseInt($('#nextRowNum').val());
+            $('#nextRowNum').val(rowNum + 1);
+        }
 
-            function updateSortOrder() {
-                $('#fieldList input.fieldSortOrder').each(function (index) {
-                    $(this).val(index + 1);
-                })
-            }
+        function removeRow(row) {
+            $(row).closest('li.list-group-item').slideUp('fast', function () { $(this).remove(); });
+        }
 
-            Sortable.create(document.getElementById('fieldList'), {
-                handle: '.glyphicon-sort',
-                animation: 150,
-                onSort: updateSortOrder
+        function nameChanged() {
+            $('#checkTypeName').val($('#typeName').val());
+            $('#nameChangeForm').submit();
+        }
+
+        function processFieldRows() {
+            var IDs = '';
+            $('#fieldList input.fieldSortOrder').each(function (index) {
+                var order = $(this);
+                order.val(index + 1);
+
+                IDs += order.attr('id').replace('sortorder_', ',');
             });
-        </script>
-    }
+
+            if (IDs.length > 0)
+                IDs = IDs.substr(1);
+
+            $('#rowIDs').val(IDs);
+        }
+
+        Sortable.create(document.getElementById('fieldList'), {
+            handle: '.glyphicon-sort',
+            animation: 150
+        });
+    </script>
+}
