@@ -27,6 +27,15 @@ namespace Aplomb.Admin.Areas.Data.Models
             get { return FieldTypes.Select(t => new SelectListItem() { Value = t.ID.ToString(), Text = t.Name, Selected = Field != null && Field.TypeID == t.ID }); }
         }
 
+        public IEnumerable<SelectListItem> MandatoryItems
+        {
+            get
+            {
+                yield return new SelectListItem() { Value = "Y", Text = "Yes", Selected = true };
+                yield return new SelectListItem() { Value = "N", Text = "No", Selected = false };
+            }
+        }
+
         public string FieldNameLabel { get { return "Name"; } }
         public string FieldTypeLabel { get { return "Type"; } }
         public string AddFieldLabel { get { return "add field"; } }

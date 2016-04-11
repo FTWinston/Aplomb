@@ -8,6 +8,7 @@
     nameProps["class"] = "form-control";
     nameProps["placeholder"] = Model.TypeNameLabel;
     nameProps["aria-label"] = Model.TypeNameDescription;
+    nameProps["aria-describedby"] = "typeNameLabel";
 
     if (Model.ReadOnly)
     {
@@ -24,6 +25,9 @@
 
     <div class="form-group">
         <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="typeNameLabel">
+                Entity type
+            </span>
             @Html.TextBox("typeName", Model.Type == null ? string.Empty : Model.Type.Name, nameProps)
             @Html.Partial("NameUnique", Model.Type == null ? new Nullable<Boolean>() : true)
         </div>

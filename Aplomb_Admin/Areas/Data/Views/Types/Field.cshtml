@@ -1,7 +1,8 @@
 ﻿@model Aplomb.Admin.Areas.Data.Models.FieldEditModel
 
-<li class="list-group-item">
+<li class="list-group-item form-inline">
     <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+
     @if (Model.Field != null)
     {
         @Html.Hidden("fieldid_" + Model.RowID, Model.Field.ID)
@@ -12,17 +13,57 @@
         var typeProps = new Dictionary<string, object>();
 
         nameProps["placeholder"] = Model.FieldNameLabel;
-        
+
         if (Model.ReadOnly)
         {
-            nameProps["readonly"] = "readonly";
-            typeProps["readonly"] = "readonly";
+            nameProps["readonly"] = typeProps["readonly"] = "readonly";
         }
-    }
-    @Html.TextBox("name_" + Model.RowID, Model.Field == null ? string.Empty : Model.Field.Name, nameProps)
-    
-    @Html.Label("type_" + Model.RowID, Model.FieldTypeLabel)
-    @Html.DropDownList("type_" + Model.RowID, Model.FieldTypeItems, Model.Field == null ? "(select)" : null, typeProps)
 
-    <input type="button" class="btn btn-default remove" value="remove field" onclick="removeRow(this);" />
+        nameProps["class"] = typeProps["class"] = "form-control";
+
+        var nameLabelID = "lblName_" + Model.RowID;
+        var typeLabelID = "lblType_" + Model.RowID;
+        var mandatoryLabelID = "lblMand_" + Model.RowID;
+
+        nameProps["aria-describedby"] = nameLabelID;
+        typeProps["aria-describedby"] = typeLabelID;
+    }
+
+    <div class="input-group">
+        <span class="input-group-addon" id="@nameLabelID">
+            Field
+        </span>
+
+        @Html.TextBox("name_" + Model.RowID, Model.Field == null ? string.Empty : Model.Field.Name, nameProps)
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon" id="@typeLabelID">
+            Type
+        </span>
+
+        @Html.DropDownList("type_" + Model.RowID, Model.FieldTypeItems, Model.Field == null ? "(select)" : null, typeProps)
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon" id="@mandatoryLabelID">
+            Mandatory
+        </span>
+            
+        @Html.DropDownList("mand_" + Model.RowID, Model.MandatoryItems, new { @class = "form-control", ariaDescribedby = mandatoryLabelID })
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">
+            Up to 
+        </span>
+
+        @Html.DropDownList("mand2_" + Model.RowID, Model.MandatoryItems, new { @class = "form-control" })
+
+        <span class="input-group-addon">
+            value(s)
+        </span>
+    </div>
+
+    <input type="button" class="btn btn-default remove" value="remove" onclick="removeRow(this);">
 </li>

@@ -105,6 +105,8 @@ namespace Aplomb.Admin.Areas.Data.Controllers
                 field.Name = data["name_" + rowNum].Trim();
                 field.TypeID = int.Parse(strTypeID);
                 field.SortOrder = int.Parse(strSortOrder);
+
+                //field.Mandatory = data["mand_" + rowNum] == "Y";
             }
 
             foreach (var toRemove in remainingFields)
