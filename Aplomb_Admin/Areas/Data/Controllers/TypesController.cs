@@ -28,7 +28,8 @@ namespace Aplomb.Admin.Areas.Data.Controllers
         {
             var type = db.EntityTypes.Single(t => t.ID == id);
             var fieldTypes = GetFieldTypes();
-            var model = new TypeEditModel(false, type, fieldTypes);
+            var entityTypes = GetEntityTypes();
+            var model = new TypeEditModel(false, type, fieldTypes, entityTypes);
             return View("Type", model);
         }
 
@@ -36,8 +37,9 @@ namespace Aplomb.Admin.Areas.Data.Controllers
         [HttpPost]
         public ActionResult AddField(int nextRowNum)
         {
-            var types = GetFieldTypes();
-            var model = new FieldEditModel(false, nextRowNum.ToString(), null, types);
+            var fieldTypes = GetFieldTypes();
+            var entityTypes = GetEntityTypes();
+            var model = new FieldEditModel(false, nextRowNum.ToString(), null, fieldTypes, entityTypes);
             return PartialView("Field", model);
         }
 
@@ -57,6 +59,11 @@ namespace Aplomb.Admin.Areas.Data.Controllers
         private IEnumerable<FieldType> GetFieldTypes()
         {
             return db.FieldTypes.OrderBy(t => t.SortOrder).ThenBy(t => t.Name);
+        }
+
+        private IEnumerable<EntityType> GetEntityTypes()
+        {
+            return db.EntityTypes.OrderBy(t => t.Name);
         }
 
         [HttpPost]
@@ -87,6 +94,8 @@ namespace Aplomb.Admin.Areas.Data.Controllers
                 var strTypeID = data["type_" + rowNum];
                 var strFieldID = data["fieldid_" + rowNum];
                 var strSortOrder = data["sortorder_" + rowNum];
+                var strNumMax = data["numMax_" + rowNum];
+                var strNumMin = data["numMin_" + rowNum];
 
                 Field field;
                 if (strFieldID == null)
@@ -105,6 +114,18 @@ namespace Aplomb.Admin.Areas.Data.Controllers
                 field.Name = data["name_" + rowNum].Trim();
                 field.TypeID = int.Parse(strTypeID);
                 field.SortOrder = int.Parse(strSortOrder);
+
+                var iNumMax = int.Parse(strNumMax);
+                if (iNumMax < 1)
+                    field.MaxNumber = null;
+                else
+                    field.MaxNumber = iNumMax;
+
+                var iNumMin = int.Parse(strNumMin);
+                if (iNumMin < 1)
+                    field.MinNumber = 1;
+                else
+                    field.MinNumber = iNumMin;
 
                 //field.Mandatory = data["mand_" + rowNum] == "Y";
             }

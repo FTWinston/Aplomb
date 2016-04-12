@@ -44,7 +44,7 @@
             {
                 foreach (var field in Model.Type.Fields.OrderBy(f => f.SortOrder))
                 {
-                    @Html.Partial("Field", new Aplomb.Admin.Areas.Data.Models.FieldEditModel(Model.ReadOnly, rowNum++.ToString(), field, Model.FieldTypes))
+                    @Html.Partial("Field", new Aplomb.Admin.Areas.Data.Models.FieldEditModel(Model.ReadOnly, rowNum++.ToString(), field, Model.FieldTypes, Model.EntityTypes))
                 }
             }
         </ul>
@@ -65,7 +65,7 @@
     {
         UpdateTargetId = "fieldList",
         InsertionMode = InsertionMode.InsertAfter,
-        HttpMethod = "POST"
+        HttpMethod = "POST",
     }, new { id = "addFieldForm" }))
     {
         @Html.Hidden("nextRowNum", rowNum);
@@ -99,6 +99,70 @@
         function nameChanged() {
             $('#checkTypeName').val($('#typeName').val());
             $('#nameChangeForm').submit();
+        }
+
+        function typeChanged(ddl) {
+            ddl = $(ddl);
+
+            var configSection = ddl.closest('li').find('.fieldConfig');
+            showConfigForType(ddl.val(), configSection);
+
+            if (configSection.is(':visible'))
+                return;
+
+            var btn = ddl.closest('li').find('.btn.config');
+            btn.addClass('btn-warning');
+            btn.removeClass('btn-default');
+            btn.toggleClass('disabled', ddl.val() == '');
+        }
+
+        function mandatoryChanged(ddl) {
+            ddl = $(ddl);
+            ddl.closest('.fieldConfig').find('.mandatoryConditions').toggle(ddl.val() == '?');
+        }
+
+        function toggleRowConfig(btn) {
+            btn = $(btn);
+            if (btn.hasClass('disabled'))
+                return;
+
+            var row = btn.closest('li');
+            var type = row.find('.fieldType').val()
+
+            btn.toggleClass('btn-default', type != '');
+            btn.toggleClass('btn-warning disabled', type == '');
+
+            var configSection = row.find('.fieldConfig');
+            showConfigForType(type, configSection);
+
+            configSection.slideToggle();
+        }
+
+        function showConfigForType(typeID, root) {
+            root.find('.notBoolean').toggle(typeID != '@Model.BooleanTypeID');
+            root.find('.onlyBoolean').toggle(typeID == '@Model.BooleanTypeID');
+            root.find('.notFK').toggle(typeID != '@Model.ForeignKeyTypeID');
+            root.find('.onlyFK').toggle(typeID == '@Model.ForeignKeyTypeID');
+
+            root.find('.onlyDate').toggle(typeID == '@Model.DateTypeID');
+            root.find('.onlyDecimal').toggle(typeID == '@Model.DecimalTypeID');
+            root.find('.onlyInt').toggle(typeID == '@Model.IntegerTypeID');
+
+            root.find('.onlyNumeric').toggle(typeID == '@Model.DateTypeID' || typeID == '@Model.DecimalTypeID' || typeID == '@Model.IntegerTypeID');
+
+            var isText = typeID == '@Model.TextTypeID' || typeID == '@Model.FreeTextTypeID';
+            root.find('.onlyText').toggle(isText);
+
+            if (isText)
+                updateTextConstraint(root);
+        }
+
+        function updateTextConstraint(root) {
+            root = $(root).closest('.fieldConfig')
+            var type = root.find('.textConstraint').val();
+
+            root.find('.onlyText.length').toggle(type == 'L');
+            root.find('.onlyText.regex').toggle(type == 'R');
         }
 
         function processFieldRows() {

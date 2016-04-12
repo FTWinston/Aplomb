@@ -1,69 +1,197 @@
 ﻿@model Aplomb.Admin.Areas.Data.Models.FieldEditModel
 
-<li class="list-group-item form-inline">
-    <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
-
-    @if (Model.Field != null)
-    {
-        @Html.Hidden("fieldid_" + Model.RowID, Model.Field.ID)
-    }
-    @Html.Hidden("sortorder_" + Model.RowID, Model.Field == null ? 0 : Model.Field.SortOrder, new { @class = "fieldSortOrder" })
-    @{
-        var nameProps = new Dictionary<string, object>();
-        var typeProps = new Dictionary<string, object>();
-
-        nameProps["placeholder"] = Model.FieldNameLabel;
-
-        if (Model.ReadOnly)
+<li class="list-group-item row">
+    <div class="col-sm-1">
+        <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+    </div>
+    <div class="col-sm-11">
+        @if (Model.Field != null)
         {
-            nameProps["readonly"] = typeProps["readonly"] = "readonly";
+            @Html.Hidden("fieldid_" + Model.RowID, Model.Field.ID)
         }
+        @Html.Hidden("sortorder_" + Model.RowID, Model.Field == null ? 0 : Model.Field.SortOrder, new { @class = "fieldSortOrder" })
+        @{
+            var nameProps = new Dictionary<string, object>();
+            var typeProps = new Dictionary<string, object>();
 
-        nameProps["class"] = typeProps["class"] = "form-control";
+            nameProps["placeholder"] = Model.FieldNameLabel;
 
-        var nameLabelID = "lblName_" + Model.RowID;
-        var typeLabelID = "lblType_" + Model.RowID;
-        var mandatoryLabelID = "lblMand_" + Model.RowID;
+            if (Model.ReadOnly)
+            {
+                nameProps["readonly"] = typeProps["readonly"] = "readonly";
+            }
 
-        nameProps["aria-describedby"] = nameLabelID;
-        typeProps["aria-describedby"] = typeLabelID;
-    }
+            nameProps["class"] = "form-control";
+            typeProps["class"] = "form-control fieldType";
 
-    <div class="input-group">
-        <span class="input-group-addon" id="@nameLabelID">
-            Field
-        </span>
+            var nameLabelID = "lblName_" + Model.RowID;
+            var typeLabelID = "lblType_" + Model.RowID;
+            var mandatoryLabelID = "lblMand_" + Model.RowID;
 
-        @Html.TextBox("name_" + Model.RowID, Model.Field == null ? string.Empty : Model.Field.Name, nameProps)
+            nameProps["aria-describedby"] = nameLabelID;
+            typeProps["aria-describedby"] = typeLabelID;
+
+            typeProps["onchange"] = "typeChanged(this);";
+
+            var configClass = Model.Field == null ? "btn-warning disabled" : "btn-default";
+        }
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="@nameLabelID">
+                        Field
+                    </span>
+
+                    @Html.TextBox("name_" + Model.RowID, Model.Field == null ? string.Empty : Model.Field.Name, nameProps)
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="@typeLabelID">
+                        Type
+                    </span>
+
+                    @Html.DropDownList("type_" + Model.RowID, Model.FieldTypeItems, Model.Field == null ? "(select)" : null, typeProps)
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="btn-group">
+                    <span class="btn config @configClass" onclick="toggleRowConfig(this);">
+                        Configure
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </span>
+
+                    <span class="btn btn-default" onclick="removeRow(this);">
+                        remove
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="fieldConfig" style="display:none;">
+            <div class="panel panel-info notBoolean">
+                <div class="panel-heading">
+                    <span class="panel-title">Quantities</span> - whether a field is required, and how many separate values it can store
+                </div>
+                <div class="panel-body row">
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="@mandatoryLabelID">
+                                Mandatory
+                            </span>
+
+                            @Html.DropDownList("mand_" + Model.RowID, Model.MandatoryItems, new { @class = "form-control", ariaDescribedby = mandatoryLabelID, onchange = "mandatoryChanged(this);" })
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            @Html.DropDownList("numMin_" + Model.RowID, Model.MinQuantityItems, new { @class = "form-control" })
+                            <span class="input-group-addon">
+                                value(s)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            @Html.DropDownList("numMax_" + Model.RowID, Model.MaxQuantityItems, new { @class = "form-control" })
+                            <span class="input-group-addon">
+                                value(s)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mandatoryConditions" style="display:none;">
+                        You can't currently specify conditions for when a field should be mandatory. Sorry.
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-info notBoolean">
+                <div class="panel-heading">
+                    <span class="panel-title">Constraints</span> - limits on the values that can be entered
+                </div>
+                <div class="panel-body row">
+                    <div class="col-sm-6 onlyFK">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                linked type
+                            </span>
+                            @Html.DropDownList("fkType_" + Model.RowID, Model.EntityTypeItems, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 onlyText">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                text constraint type
+                            </span>
+                            @Html.DropDownList("txtType_" + Model.RowID, Model.TextConstraintItems, new { @class = "form-control textConstraint", onchange = "updateTextConstraint(this);" })
+                        </div>
+                    </div>
+                    <div class="col-sm-3 onlyText length">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                minimum length
+                            </span>
+                            @Html.TextBox("txtLenMin_" + Model.RowID, "1", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-sm-3 onlyText length">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                maximum length
+                            </span>
+                            @Html.TextBox("txtLenMax_" + Model.RowID, "", new { @class = "form-control onlyText" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 onlyText regex">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                expression
+                            </span>
+                            @Html.TextBox("txtRegex_" + Model.RowID, "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-sm-4 onlyNumeric length">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                minimum value
+                            </span>
+                            @Html.TextBox("numMin_" + Model.RowID, "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-sm-4 onlyNumeric length">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                maximum value
+                            </span>
+                            @Html.TextBox("numMax_" + Model.RowID, "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-info notFK">
+                <div class="panel-heading">
+                    <span class="panel-title">Default</span> - initial value, when a record is first created
+                </div>
+                <div class="panel-body row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    default value
+                                </span>
+                                @Html.DropDownList("boolDefault_" + Model.RowID, Model.BoolValueItems, new { @class = "form-control onlyBoolean" })
+                                @Html.TextBox("dateDefault_" + Model.RowID, "01/01/2000", new { @class = "form-control onlyDate" })
+                                @Html.TextBox("decimalDefault_" + Model.RowID, "0.0", new { @class = "form-control onlyDecimal" })
+                                @Html.TextBox("intDefault_" + Model.RowID, "0", new { @class = "form-control onlyInt" })
+                                @Html.TextBox("txtDefault_" + Model.RowID, "a", new { @class = "form-control onlyText" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="input-group">
-        <span class="input-group-addon" id="@typeLabelID">
-            Type
-        </span>
-
-        @Html.DropDownList("type_" + Model.RowID, Model.FieldTypeItems, Model.Field == null ? "(select)" : null, typeProps)
-    </div>
-
-    <div class="input-group">
-        <span class="input-group-addon" id="@mandatoryLabelID">
-            Mandatory
-        </span>
-            
-        @Html.DropDownList("mand_" + Model.RowID, Model.MandatoryItems, new { @class = "form-control", ariaDescribedby = mandatoryLabelID })
-    </div>
-
-    <div class="input-group">
-        <span class="input-group-addon">
-            Up to 
-        </span>
-
-        @Html.DropDownList("mand2_" + Model.RowID, Model.MandatoryItems, new { @class = "form-control" })
-
-        <span class="input-group-addon">
-            value(s)
-        </span>
-    </div>
-
-    <input type="button" class="btn btn-default remove" value="remove" onclick="removeRow(this);">
 </li>
