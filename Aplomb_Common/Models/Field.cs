@@ -16,6 +16,9 @@ namespace Aplomb.Common.Models
     {
         public Field()
         {
+            this.Mandatory = false;
+            this.MinNumber = 1;
+            this.MaxNumber = 1;
             this.FieldValues = new HashSet<FieldValue>();
             this.RightFields = new HashSet<RightField>();
             this.LayoutFields = new HashSet<LayoutField>();
@@ -25,15 +28,21 @@ namespace Aplomb.Common.Models
         public int EntityTypeID { get; set; }
         public int TypeID { get; set; }
         public string Name { get; set; }
+        public int SortOrder { get; set; }
         public bool Mandatory { get; set; }
         public int MinNumber { get; set; }
         public Nullable<int> MaxNumber { get; set; }
-        public int SortOrder { get; set; }
-        public string ExtraInfo { get; set; }
+        public Nullable<int> ForeignKeyEntityTypeID { get; set; }
+        public Nullable<int> NumericDefault { get; set; }
+        public Nullable<int> MinValue { get; set; }
+        public Nullable<int> MaxValue { get; set; }
+        public string TextDefault { get; set; }
+        public string TextRegex { get; set; }
     
         public virtual EntityType EntityType { get; set; }
         public virtual FieldType FieldType { get; set; }
         public virtual ICollection<FieldValue> FieldValues { get; set; }
+        public virtual EntityType ForeignKeyEntityType { get; set; }
         public virtual ICollection<RightField> RightFields { get; set; }
         public virtual ICollection<LayoutField> LayoutFields { get; set; }
     }

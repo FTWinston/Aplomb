@@ -18,6 +18,7 @@ namespace Aplomb.Common.Models
         {
             this.Entities = new HashSet<Entity>();
             this.Fields = new HashSet<Field>();
+            this.ForeignKeyFields = new HashSet<Field>();
             this.RightEntityTypes = new HashSet<RightEntityType>();
             this.Layouts = new HashSet<Layout>();
             this.DataDiagramEntityTypes = new HashSet<DataDiagramEntityType>();
@@ -28,6 +29,7 @@ namespace Aplomb.Common.Models
     
         public virtual ICollection<Entity> Entities { get; set; }
         public virtual ICollection<Field> Fields { get; set; }
+        public virtual ICollection<Field> ForeignKeyFields { get; set; }
         public virtual ICollection<RightEntityType> RightEntityTypes { get; set; }
         public virtual ICollection<Layout> Layouts { get; set; }
         public virtual ICollection<DataDiagramEntityType> DataDiagramEntityTypes { get; set; }

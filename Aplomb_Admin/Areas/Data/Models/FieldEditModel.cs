@@ -72,8 +72,8 @@ namespace Aplomb.Admin.Areas.Data.Models
         {
             get
             {
-                yield return new SelectListItem() { Value = "L", Text = "Length", Selected = true };
-                yield return new SelectListItem() { Value = "R", Text = "Regular expression", Selected = false };
+                yield return new SelectListItem() { Value = "length", Text = "Length", Selected = true };
+                yield return new SelectListItem() { Value = "regex", Text = "Regular expression", Selected = false };
             }
         }
 

@@ -17,14 +17,6 @@ namespace Aplomb.Admin.Areas.Data.Models
             EntityTypes = entityTypes;
         }
 
-        public int BooleanTypeID { get { return 1; } }
-        public int DateTypeID { get { return 2; } }
-        public int DecimalTypeID { get { return 3; } }
-        public int ForeignKeyTypeID {  get { return 4; } }
-        public int IntegerTypeID { get { return 5; } }
-        public int FreeTextTypeID { get { return 6; } }
-        public int TextTypeID { get { return 7; } }
-
         public bool ReadOnly { get; private set; }
         public EntityType Type { get; private set; }
         public IEnumerable<FieldType> FieldTypes { get; private set; }

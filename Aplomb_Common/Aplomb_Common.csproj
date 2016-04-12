@@ -81,6 +81,7 @@
     <Compile Include="Models\FieldType.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReferenceValues.cs" />
     <Compile Include="Models\FieldValue.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

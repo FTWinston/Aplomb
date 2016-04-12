@@ -134,11 +134,16 @@
           <Property Name="EntityTypeID" Type="int" Nullable="false" />
           <Property Name="TypeID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
           <Property Name="Mandatory" Type="bit" Nullable="false" />
           <Property Name="MinNumber" Type="int" Nullable="false" />
           <Property Name="MaxNumber" Type="int" />
-          <Property Name="SortOrder" Type="int" Nullable="false" />
-          <Property Name="ExtraInfo" Type="xml" />
+          <Property Name="ForeignKeyEntityTypeID" Type="int" />
+          <Property Name="NumericDefault" Type="int" />
+          <Property Name="MinValue" Type="int" />
+          <Property Name="MaxValue" Type="int" />
+          <Property Name="TextDefault" Type="nvarchar" MaxLength="255" />
+          <Property Name="TextRegex" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="FieldTypes">
           <Key>
@@ -330,6 +335,18 @@
             </Principal>
             <Dependent Role="Fields">
               <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fields_ForeignEntityTypes">
+          <End Role="EntityTypes" Type="Self.EntityTypes" Multiplicity="0..1" />
+          <End Role="Fields" Type="Self.Fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Fields">
+              <PropertyRef Name="ForeignKeyEntityTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -817,6 +834,10 @@
             <End Role="FieldTypes" EntitySet="FieldTypes" />
             <End Role="Fields" EntitySet="Fields" />
           </AssociationSet>
+          <AssociationSet Name="FK_Fields_ForeignEntityTypes" Association="Self.FK_Fields_ForeignEntityTypes">
+            <End Role="EntityTypes" EntitySet="EntityTypes" />
+            <End Role="Fields" EntitySet="Fields" />
+          </AssociationSet>
           <AssociationSet Name="FK_FieldValues_Bit_FieldValues" Association="Self.FK_FieldValues_Bit_FieldValues">
             <End Role="FieldValues" EntitySet="FieldValues" />
             <End Role="FieldValues_Bit" EntitySet="FieldValues_Bit" />
@@ -987,6 +1008,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Entities" Relationship="Self.FK_Entities_EntityTypes" FromRole="EntityTypes" ToRole="Entities" />
           <NavigationProperty Name="Fields" Relationship="Self.FK_Fields_EntityTypes" FromRole="EntityTypes" ToRole="Fields" />
+          <NavigationProperty Name="ForeignKeyFields" Relationship="Aplomb.Common.Models.FK_Fields_ForeignEntityTypes" FromRole="EntityType" ToRole="Field" />
           <NavigationProperty Name="RightEntityTypes" Relationship="Self.FK_RightEntityTypes_EntityTypes" FromRole="EntityTypes" ToRole="RightEntityTypes" />
           <NavigationProperty Name="Layouts" Relationship="Aplomb.Common.Models.FK_Layouts_EntityTypes" FromRole="EntityType" ToRole="Layout" />
           <NavigationProperty Name="DataDiagramEntityTypes" Relationship="Aplomb.Common.Models.FK_DataDiagramEntityTypes_EntityTypes" FromRole="EntityType" ToRole="DataDiagramEntityType" />
@@ -999,16 +1021,22 @@
           <Property Name="EntityTypeID" Type="Int32" Nullable="false" />
           <Property Name="TypeID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Mandatory" Type="Boolean" Nullable="false" />
-          <Property Name="MinNumber" Type="Int32" Nullable="false" />
-          <Property Name="MaxNumber" Type="Int32" />
           <Property Name="SortOrder" Type="Int32" Nullable="false" />
-          <Property Name="ExtraInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mandatory" Type="Boolean" Nullable="false" DefaultValue="false" />
+          <Property Name="MinNumber" Type="Int32" Nullable="false" DefaultValue="1" />
+          <Property Name="MaxNumber" Type="Int32" DefaultValue="1" />
           <NavigationProperty Name="EntityType" Relationship="Self.FK_Fields_EntityTypes" FromRole="Fields" ToRole="EntityTypes" />
           <NavigationProperty Name="FieldType" Relationship="Self.FK_Fields_FieldTypes" FromRole="Fields" ToRole="FieldTypes" />
           <NavigationProperty Name="FieldValues" Relationship="Self.FK_FieldValues_Fields" FromRole="Fields" ToRole="FieldValues" />
+          <NavigationProperty Name="ForeignKeyEntityType" Relationship="Aplomb.Common.Models.FK_Fields_ForeignEntityTypes" FromRole="Field" ToRole="EntityType" />
           <NavigationProperty Name="RightFields" Relationship="Self.FK_RightFields_RightFields" FromRole="Fields" ToRole="RightFields" />
           <NavigationProperty Name="LayoutFields" Relationship="Aplomb.Common.Models.FK_LayoutFields_Fields" FromRole="Field" ToRole="LayoutField" />
+          <Property Name="ForeignKeyEntityTypeID" Type="Int32" />
+          <Property Name="NumericDefault" Type="Int32" />
+          <Property Name="MinValue" Type="Int32" />
+          <Property Name="MaxValue" Type="Int32" />
+          <Property Name="TextDefault" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TextRegex" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FieldType">
           <Key>
@@ -1654,6 +1682,10 @@
             <End Role="FieldValue" EntitySet="FieldValues" />
             <End Role="FieldValues_Text" EntitySet="FieldValues_Text" />
           </AssociationSet>
+          <AssociationSet Name="FK_Fields_ForeignEntityTypes" Association="Aplomb.Common.Models.FK_Fields_ForeignEntityTypes">
+            <End Role="EntityType" EntitySet="EntityTypes" />
+            <End Role="Field" EntitySet="Fields" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="LayoutField">
           <Key>
@@ -2005,6 +2037,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Fields_ForeignEntityTypes">
+          <End Type="Aplomb.Common.Models.EntityType" Role="EntityType" Multiplicity="0..1" />
+          <End Type="Aplomb.Common.Models.Field" Role="Field" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Field">
+              <PropertyRef Name="ForeignKeyEntityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2032,6 +2076,12 @@
           <EntitySetMapping Name="Fields">
             <EntityTypeMapping TypeName="Aplomb.Common.Models.Field">
               <MappingFragment StoreEntitySet="Fields">
+                <ScalarProperty Name="TextRegex" ColumnName="TextRegex" />
+                <ScalarProperty Name="TextDefault" ColumnName="TextDefault" />
+                <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
+                <ScalarProperty Name="MinValue" ColumnName="MinValue" />
+                <ScalarProperty Name="NumericDefault" ColumnName="NumericDefault" />
+                <ScalarProperty Name="ForeignKeyEntityTypeID" ColumnName="ForeignKeyEntityTypeID" />
                 <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EntityTypeID" ColumnName="EntityTypeID" />
@@ -2040,7 +2090,6 @@
                 <ScalarProperty Name="MinNumber" ColumnName="MinNumber" />
                 <ScalarProperty Name="MaxNumber" ColumnName="MaxNumber" />
                 <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="ExtraInfo" ColumnName="ExtraInfo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

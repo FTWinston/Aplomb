@@ -60,7 +60,8 @@
                 <div class="btn-group">
                     <span class="btn config @configClass" onclick="toggleRowConfig(this);">
                         Configure
-                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
                     </span>
 
                     <span class="btn btn-default" onclick="removeRow(this);">
@@ -152,7 +153,7 @@
                             @Html.TextBox("txtRegex_" + Model.RowID, "", new { @class = "form-control" })
                         </div>
                     </div>
-                    <div class="col-sm-4 onlyNumeric length">
+                    <div class="col-sm-6 onlyNumeric length">
                         <div class="input-group">
                             <span class="input-group-addon">
                                 minimum value
@@ -160,7 +161,7 @@
                             @Html.TextBox("numMin_" + Model.RowID, "", new { @class = "form-control" })
                         </div>
                     </div>
-                    <div class="col-sm-4 onlyNumeric length">
+                    <div class="col-sm-6 onlyNumeric length">
                         <div class="input-group">
                             <span class="input-group-addon">
                                 maximum value

@@ -6,9 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="f272ec7c18674d9bab04f890ac6a1d6b" Name="Diagram1" ZoomLevel="76">
         <EntityTypeShape EntityType="Aplomb.Common.Models.Entity" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" FillColor="0, 122, 204" />
-        <EntityTypeShape EntityType="Aplomb.Common.Models.EntityType" Width="1.5" PointX="11.375" PointY="8.375" IsExpanded="true" FillColor="Green" />
-        <EntityTypeShape EntityType="Aplomb.Common.Models.Field" Width="1.5" PointX="13.25" PointY="8.375" IsExpanded="true" FillColor="Green" />
-        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldType" Width="1.5" PointX="15.125" PointY="8.375" IsExpanded="true" FillColor="Green" />
+        <EntityTypeShape EntityType="Aplomb.Common.Models.EntityType" Width="2" PointX="10.75" PointY="8.375" IsExpanded="true" FillColor="Green" />
+        <EntityTypeShape EntityType="Aplomb.Common.Models.Field" Width="1.875" PointX="13.25" PointY="8.375" IsExpanded="true" FillColor="Green" />
+        <EntityTypeShape EntityType="Aplomb.Common.Models.FieldType" Width="1.5" PointX="15.625" PointY="8.375" IsExpanded="true" FillColor="Green" />
         <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue" Width="1.75" PointX="5.625" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue_Bit" Width="1.5" PointX="7.875" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValue_Date" Width="1.625" PointX="13.375" PointY="14.125" IsExpanded="true" />
@@ -83,6 +83,7 @@
         <EntityTypeShape EntityType="Aplomb.Common.Models.FieldValues_Text" Width="1.75" PointX="15.25" PointY="14.125" />
         <AssociationConnector Association="Aplomb.Common.Models.FK_FieldValues_FreeText_FieldValues" />
         <AssociationConnector Association="Aplomb.Common.Models.FK_FieldValues_Text_FieldValues" />
+        <AssociationConnector Association="Aplomb.Common.Models.FK_Fields_ForeignEntityTypes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

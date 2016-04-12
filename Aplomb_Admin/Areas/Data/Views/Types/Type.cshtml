@@ -139,18 +139,18 @@
         }
 
         function showConfigForType(typeID, root) {
-            root.find('.notBoolean').toggle(typeID != '@Model.BooleanTypeID');
-            root.find('.onlyBoolean').toggle(typeID == '@Model.BooleanTypeID');
-            root.find('.notFK').toggle(typeID != '@Model.ForeignKeyTypeID');
-            root.find('.onlyFK').toggle(typeID == '@Model.ForeignKeyTypeID');
+            root.find('.notBoolean').toggle(typeID != '@Aplomb.Common.Models.ReferenceValues.FieldType.Boolean');
+            root.find('.onlyBoolean').toggle(typeID == '@Aplomb.Common.Models.ReferenceValues.FieldType.Boolean');
+            root.find('.notFK').toggle(typeID != '@Aplomb.Common.Models.ReferenceValues.FieldType.ForeignKey');
+            root.find('.onlyFK').toggle(typeID == '@Aplomb.Common.Models.ReferenceValues.FieldType.ForeignKey');
 
-            root.find('.onlyDate').toggle(typeID == '@Model.DateTypeID');
-            root.find('.onlyDecimal').toggle(typeID == '@Model.DecimalTypeID');
-            root.find('.onlyInt').toggle(typeID == '@Model.IntegerTypeID');
+            root.find('.onlyDate').toggle(typeID == '@Aplomb.Common.Models.ReferenceValues.FieldType.Date');
+            root.find('.onlyDecimal').toggle(typeID == '@Aplomb.Common.Models.ReferenceValues.FieldType.Decimal');
+            root.find('.onlyInt').toggle(typeID == '@Aplomb.Common.Models.ReferenceValues.FieldType.Integer');
 
-            root.find('.onlyNumeric').toggle(typeID == '@Model.DateTypeID' || typeID == '@Model.DecimalTypeID' || typeID == '@Model.IntegerTypeID');
+            root.find('.onlyNumeric').toggle(typeID == '@Aplomb.Common.Models.ReferenceValues.FieldType.Date' || typeID == '@Aplomb.Common.Models.ReferenceValues.FieldType.Decimal' || typeID == '@Aplomb.Common.Models.ReferenceValues.FieldType.Integer');
 
-            var isText = typeID == '@Model.TextTypeID' || typeID == '@Model.FreeTextTypeID';
+            var isText = typeID == '@Aplomb.Common.Models.ReferenceValues.FieldType.Text' || typeID == '@Aplomb.Common.Models.ReferenceValues.FieldType.FreeText';
             root.find('.onlyText').toggle(isText);
 
             if (isText)

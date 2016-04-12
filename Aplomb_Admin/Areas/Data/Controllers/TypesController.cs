@@ -128,6 +128,134 @@ namespace Aplomb.Admin.Areas.Data.Controllers
                     field.MinNumber = iNumMin;
 
                 field.Mandatory = data["mand_" + rowNum] == "Y";
+
+                if (field.TypeID == ReferenceValues.FieldType.Boolean)
+                {
+                    int value = int.Parse(data["boolDefault_" + rowIDs]);
+                    if (value == 0 || value == 1)
+                        field.NumericDefault = value;
+                    else
+                        field.NumericDefault = 0;
+
+                    field.MinValue = null;
+                    field.MaxValue = null;
+                }
+
+                if (field.TypeID == ReferenceValues.FieldType.Integer)
+                {
+                    field.NumericDefault = int.Parse(data["intDefault_" + rowIDs]);
+                    
+                    int iVal;
+                    var strVal = data["numMin_" + rowNum];
+                    if (int.TryParse(strVal, out iVal) && iVal > 0)
+                        field.MinValue = iVal;
+                    else
+                        field.MinValue = 1;
+
+                    strVal = data["numMax_" + rowNum];
+                    if (int.TryParse(strVal, out iVal) && iVal >= field.MinValue)
+                        field.MaxValue = iVal;
+                    else
+                        field.MinValue = null;
+                }
+
+                if (field.TypeID == ReferenceValues.FieldType.Decimal)
+                {
+                    field.NumericDefault = int.Parse(data["decimalDefault_" + rowIDs]);
+
+                    int iVal;
+                    var strVal = data["numMin_" + rowNum];
+                    if (int.TryParse(strVal, out iVal) && iVal > 0)
+                        field.MinValue = iVal;
+                    else
+                        field.MinValue = 1;
+
+                    strVal = data["numMax_" + rowNum];
+                    if (int.TryParse(strVal, out iVal) && iVal >= field.MinValue)
+                        field.MaxValue = iVal;
+                    else
+                        field.MinValue = null;
+                }
+                
+                if (field.TypeID == ReferenceValues.FieldType.Date)
+                {
+                    field.NumericDefault = int.Parse(data["dateDefault_" + rowIDs]);
+
+                    int iVal;
+                    var strVal = data["numMin_" + rowNum];
+                    if (int.TryParse(strVal, out iVal) && iVal > 0)
+                        field.MinValue = iVal;
+                    else
+                        field.MinValue = 1;
+
+                    strVal = data["numMax_" + rowNum];
+                    if (int.TryParse(strVal, out iVal) && iVal >= field.MinValue)
+                        field.MaxValue = iVal;
+                    else
+                        field.MinValue = null;
+                }
+
+                if (field.TypeID == ReferenceValues.FieldType.ForeignKey)
+                {
+                    int foreignKeyTypeID = int.Parse("fkType_" + rowNum);
+
+                    if (db.EntityTypes.SingleOrDefault(t => t.ID == foreignKeyTypeID) != null)
+                        field.ForeignKeyEntityTypeID = foreignKeyTypeID;
+                    else
+                        field.ForeignKeyEntityTypeID = null;
+
+                    field.MinValue = null;
+                    field.MaxValue = null;
+                    field.NumericDefault = null;
+                }
+                else
+                    field.ForeignKeyEntityTypeID = null;
+                
+                if (field.TypeID == ReferenceValues.FieldType.Text || field.TypeID == ReferenceValues.FieldType.FreeText)
+                {
+                    var input = data["txtDefault_" + rowNum];
+                    if (!string.IsNullOrWhiteSpace(input))
+                        field.TextDefault = input.Trim();
+
+                    var constraintType = data["txtType_" + rowNum];
+                    if (constraintType == "length")
+                    {
+                        int iVal;
+                        var strVal = data["txtLenMin_" + rowNum];
+                        if (int.TryParse(strVal, out iVal) && iVal > 0)
+                            field.MinValue = iVal;
+                        else
+                            field.MinValue = 1;
+
+                        strVal = data["txtLenMax_" + rowNum];
+                        if (int.TryParse(strVal, out iVal) && iVal >= field.MinValue)
+                            field.MaxValue = iVal;
+                        else
+                            field.MinValue = null;
+
+                        field.TextRegex = null;
+                    }
+                    else if (constraintType == "regex")
+                    {
+                        field.MinValue = null;
+                        field.MaxValue = null;
+
+                        input = data["txtRegex_" + rowNum];
+                        if (!string.IsNullOrWhiteSpace(input))
+                            field.TextRegex = input.Trim();
+                        else
+                            field.TextRegex = null;
+                    }
+                    else
+                    {
+                        field.MinValue = 1;
+                        field.MaxValue = null;
+                        field.TextRegex = null;
+                    }
+                    field.NumericDefault = null;
+                }
+                else
+                    field.TextDefault = field.TextRegex = null;
             }
 
             foreach (var toRemove in remainingFields)
