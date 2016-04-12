@@ -127,7 +127,7 @@ namespace Aplomb.Admin.Areas.Data.Controllers
                 else
                     field.MinNumber = iNumMin;
 
-                //field.Mandatory = data["mand_" + rowNum] == "Y";
+                field.Mandatory = data["mand_" + rowNum] == "Y";
             }
 
             foreach (var toRemove in remainingFields)

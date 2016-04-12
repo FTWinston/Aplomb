@@ -25,6 +25,7 @@ namespace Aplomb.Common.Models
         public int EntityTypeID { get; set; }
         public int TypeID { get; set; }
         public string Name { get; set; }
+        public bool Mandatory { get; set; }
         public int MinNumber { get; set; }
         public Nullable<int> MaxNumber { get; set; }
         public int SortOrder { get; set; }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
@@ -46,7 +46,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EntityID" Type="int" Nullable="false" />
           <Property Name="FieldID" Type="int" Nullable="false" />
-          <Property Name="FieldNumber" Type="int" Nullable="false" />
           <Property Name="ValueNumber" Type="int" Nullable="false" />
           <Property Name="TimeStamp" Type="datetime" Nullable="false" />
           <Property Name="Deleted" Type="bit" Nullable="false" />
@@ -135,6 +134,7 @@
           <Property Name="EntityTypeID" Type="int" Nullable="false" />
           <Property Name="TypeID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mandatory" Type="bit" Nullable="false" />
           <Property Name="MinNumber" Type="int" Nullable="false" />
           <Property Name="MaxNumber" Type="int" />
           <Property Name="SortOrder" Type="int" Nullable="false" />
@@ -999,6 +999,7 @@
           <Property Name="EntityTypeID" Type="Int32" Nullable="false" />
           <Property Name="TypeID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mandatory" Type="Boolean" Nullable="false" />
           <Property Name="MinNumber" Type="Int32" Nullable="false" />
           <Property Name="MaxNumber" Type="Int32" />
           <Property Name="SortOrder" Type="Int32" Nullable="false" />
@@ -1027,7 +1028,6 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EntityID" Type="Int32" Nullable="false" />
           <Property Name="FieldID" Type="Int32" Nullable="false" />
-          <Property Name="FieldNumber" Type="Int32" Nullable="false" />
           <Property Name="ValueNumber" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Entity" Relationship="Self.FK_FieldValues_Entities" FromRole="FieldValues" ToRole="Entities" />
           <NavigationProperty Name="Field" Relationship="Self.FK_FieldValues_Fields" FromRole="FieldValues" ToRole="Fields" />
@@ -2032,6 +2032,7 @@
           <EntitySetMapping Name="Fields">
             <EntityTypeMapping TypeName="Aplomb.Common.Models.Field">
               <MappingFragment StoreEntitySet="Fields">
+                <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EntityTypeID" ColumnName="EntityTypeID" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
@@ -2062,7 +2063,6 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EntityID" ColumnName="EntityID" />
                 <ScalarProperty Name="FieldID" ColumnName="FieldID" />
-                <ScalarProperty Name="FieldNumber" ColumnName="FieldNumber" />
                 <ScalarProperty Name="ValueNumber" ColumnName="ValueNumber" />
               </MappingFragment>
             </EntityTypeMapping>

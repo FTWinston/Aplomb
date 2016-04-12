@@ -17,7 +17,6 @@ namespace Aplomb.Common.Models
         public int ID { get; set; }
         public int EntityID { get; set; }
         public int FieldID { get; set; }
-        public int FieldNumber { get; set; }
         public int ValueNumber { get; set; }
         public System.DateTime TimeStamp { get; set; }
         public bool Deleted { get; set; }
